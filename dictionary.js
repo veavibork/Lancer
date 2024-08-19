@@ -1,4 +1,4 @@
-export const synonyms = {
+const synonyms = {
     "invoked": "invoke",
     "Diasporans": "Diasporan",
     "Diaspora": "Diasporan",
@@ -31,7 +31,7 @@ export const synonyms = {
     "ACCURACY": "ACCURATE"
   }
 
-export const keywords = {
+const keywords = {
     "background": "pg 20. Your pilot`s background describes their life before they became a mech pilot.",
     "LL0": "The presumed starting level for a new character. Noob.",
     "invoke": "pg 20. Outside of combat, you (or the GM) can invoke your pilot`s background to receive 1 ACCURACY or 1 DIFFICULTY on any skill check, if their background is relevant.",
