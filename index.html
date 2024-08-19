@@ -1,0 +1,1793 @@
+<html>
+
+<head>
+  <style>
+    [data-tooltip] {
+      display: inline-block;
+      position: relative;
+      cursor: help;
+      padding: 0px;
+      border-bottom: 1px dotted black;
+      white-space: pre-line;
+    }
+
+    /* Tooltip styling */
+    [data-tooltip]:before {
+      content: attr(data-tooltip);
+      display: none;
+      position: absolute;
+      background: #000;
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 14px;
+      line-height: 1.4;
+      min-width: 300px;
+      text-align: left;
+      border-radius: 4px;
+    }
+
+    /* Dynamic horizontal centering */
+    [data-tooltip-position="top"]:before,
+    [data-tooltip-position="bottom"]:before {
+      left: 50%;
+      -ms-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+
+    /* Dynamic vertical centering */
+    [data-tooltip-position="right"]:before,
+    [data-tooltip-position="left"]:before {
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+    [data-tooltip-position="top"]:before {
+      bottom: 100%;
+      margin-bottom: 6px;
+    }
+
+    [data-tooltip-position="right"]:before {
+      left: 100%;
+      margin-left: 6px;
+    }
+
+    [data-tooltip-position="bottom"]:before {
+      top: 100%;
+      margin-top: 6px;
+    }
+
+    [data-tooltip-position="left"]:before {
+      right: 100%;
+      margin-right: 6px;
+    }
+
+    /* Tooltip arrow styling/placement */
+    [data-tooltip]:after {
+      content: '';
+      display: none;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+    }
+
+    /* Dynamic horizontal centering for the tooltip */
+    [data-tooltip-position="top"]:after,
+    [data-tooltip-position="bottom"]:after {
+      left: 50%;
+      margin-left: -6px;
+    }
+
+    /* Dynamic vertical centering for the tooltip */
+    [data-tooltip-position="right"]:after,
+    [data-tooltip-position="left"]:after {
+      top: 50%;
+      margin-top: -6px;
+    }
+
+    [data-tooltip-position="top"]:after {
+      bottom: 100%;
+      border-width: 6px 6px 0;
+      border-top-color: #000;
+    }
+
+    [data-tooltip-position="right"]:after {
+      left: 100%;
+      border-width: 6px 6px 6px 0;
+      border-right-color: #000;
+    }
+
+    [data-tooltip-position="bottom"]:after {
+      top: 100%;
+      border-width: 0 6px 6px;
+      border-bottom-color: #000;
+    }
+
+    [data-tooltip-position="left"]:after {
+      right: 100%;
+      border-width: 6px 0 6px 6px;
+      border-left-color: #000;
+    }
+
+    /* Show the tooltip when hovering */
+    [data-tooltip]:hover:before,
+    [data-tooltip]:hover:after {
+      display: block;
+      z-index: 50;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      text-align: center;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: Lightgray;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="check">
+    <center>
+      <h2><i>Lancer</i></h2>
+      <p><i>is not this document</i>
+      <h3>©2019 Massif Press</h3>
+      <h3>massif-press.itch.io</h3>
+      <h3>twitter.com/LancerRPG</h3>
+      <p><i>this is an unauthorized, unwanted, unnecessary, abbreviated SRD, and I owe them an apology</i>
+    </center>
+
+    <hr>
+
+    <h1>SECTION 0: GETTING STARTED</h1>
+
+    <h2>PLAYING LANCER</h2>
+
+    <h3>THE GOLDEN RULES</h3>
+
+    <p>There are two golden rules to remember when playing <i>Lancer</i>:
+
+    <h4>I: Specific rules override general statements and rules.</h4>
+
+    <p>For example, when you shoot at an enemy, your roll is normally influenced by whether they’re in cover; however, SEEKING weapons ignore cover. Because the SEEKING tag is a specific rule, it supersedes the general rules governing cover.
+
+    <h4>II: Always round up (to the nearest whole number).</h4>
+
+    <h3>SKILL CHECKS, ATTACKS, AND SAVES</h3>
+
+    <p>There are three types of dice rolls in <i>Lancer</i>: skill checks, attacks, and saves.
+
+    <p>In narrative play, you will only need to worry about the first of these. In mech combat you will use all three.
+
+    <p>You make skill checks when your character is in a challenging or tense situation that requires effort to overcome. When you want to act in such a situation, state your objective (e.g., break down the door, decrypt the data, or sweet-talk the guard), then roll 1d20, and add any relevant bonuses. On a total of 10+, you succeed. A result of 9 or less means you failed to accomplish your goal and may suffer consequences as a result. Although the GM can’t change the target number (10), they have access to several tools that are explained later (p. 45-47), such as declaring a skill challenge or deciding that your action is DIFFICULT or RISKY.
+
+    <p>In mech combat, attacks are any offensive actions against other characters, like firing a weapon or hacking into an opponent’s mech. Attack rolls are similar to skill checks – you roll 1d20 and add any bonuses – but the target number isn’t always 10, and usually depends on the defensive capabilities of your target. For an attack to be successful it needs to equal or exceed the target’s defense. Successful attacks are described as “hits” - so if the rules tell you that an effect happens “on hit”, that means it takes place when you make a successful attack. Some attacks also result in critical hits. On a roll of 20+ you perform a critical hit, which allows you to deal more damage or sometimes trigger extra effects.
+
+    <p>Although there are different types of attacks, including ranged, melee, and tech attacks, they all use the same basic rules described here.
+
+    <p>Lastly, saves are rolls made to avoid or resist negative effects in mech combat. You might roll a save to prevent a hacker wrecking your systems, to avoid being blinded by a flash grenade, or to dive away from an explosion. To save, you roll 1d20 and add any bonuses, but the target number can differ from 10 as it can with attacks. The target number for a save usually depends on the abilities of the attacker. If you equal or exceed this number, you succeed; if your roll is lower, you fail. The outcome of each result will depend on what you are trying to avoid.
+
+    <h4>CONTESTED CHECKS</h4>
+
+    <p>In some cases, the rules will tell you to make a contested check, representing a challenge between two parties. In a contested check, both participants make skill checks and add any bonuses. Whoever has the highest result wins. If the result is a tie, the attacker – the one who initiated the contest – wins. You might make contested checks in both narrative play and mech combat.
+
+    <h4>CHOOSING TO FAIL</h4>
+
+    <p>You may always choose to fail a skill check or save. You might do this if an ally is trying to help you out or even just because you think failing would create a more interesting story.
+
+    <h4>BONUSES</h4>
+
+    <p>There are three kinds of bonuses that can be applied to rolls in Lancer:
+    <ul>
+      <li>ACCURACY (Represented as ➕)
+      <li>DIFFICULTY (Represented as ➖)
+      <li>STATISTIC BONUSES
+    </ul>
+
+    <p>ACCURACY and DIFFICULTY represent momentary advantages or disadvantages (see below). Statistic bonuses come from three sources: your pilot’s talent and experience (triggers), their skill with mechs (mech skills), and their GRIT. Each roll can only benefit from one statistic bonus at a time. In many cases, none of these bonuses will apply and you will just roll 1d20.
+
+    <h4>ACCURACY AND DIFFICULTY</h4>
+
+    <p>ACCURACY and DIFFICULTY are temporary modifiers gained and lost in rapid, chaotic moments of action. For example, two mech pilots, equally matched, duel amidst the shifting debris of a shattered frigate. Attempting to land a shot, they dodge to avoid incoming fire and floating, slagged bulkheads. The debris makes it unlikely that either will land a clean hit; however, one of the pilots, thinking quickly, hides among the floating metal. When their enemy gets close, the pilot springs forth from hiding and catches their opponent unaware – making the shot much easier than normal.
+
+    <p>Situations like this can cause pilots to gain ACCURACY➕ or DIFFICULTY➖.
+    <ul>
+      <li>Each point of ACCURACY➕ adds 1d6 to a roll.
+      <li>Each point of DIFFICULTY➖ subtracts 1d6 from a roll.
+      <li>ACCURACY➕ and DIFFICULTY➖ cancel each other out on a 1:1 basis.
+    </ul>
+
+    <p>If you are lucky enough to be rolling several of the same bonus dice, whether ACCURACY➕ or DIFFICULTY➖, you don’t add them together to determine the result. Instead, find the highest number rolled and apply it to the final roll. Because of this, no roll can ever receive more than –6 or +6 from ACCURACY➕ or DIFFICULTY➖.
+
+    <p>For example:
+    <ul>
+      <li>For an attack with 2 ACCURACY➕, roll 2d6 and choose the highest of the two dice, then add that number to your attack roll. If you roll 3 on one die and 4 on the other, you add +4 to the roll, not +7.
+      <li>For an attack with 2 ACCURACY➕ and 1 DIFFICULTY➖, you only add 1d6 to your attack roll as 1 DIFFICULTY and 1 ACCURACY cancel each other out.
+      <li>For an attack with 1 ACCURACY➕ and 1 DIFFICULTY➖, you don’t add anything to the roll – the dice cancel each other out.
+    </ul>
+
+    <h4>GRIT</h4>
+
+    <p>Pilots are lucky and unique individuals, multi-talented and resilient. Even so, brand-new pilots don’t measure up to tempered, battle-hardened veterans when push comes to shove. The benefits of experience are measured by GRIT, a bonus that reflects your pilot’s deep reservoirs of resolve and will to live. GRIT is half of your character’s license level, rounded up. It improves attack bonuses, hit points, and save targets for both your pilot and your mech.
+
+    <h3>MISSIONS, DOWNTIME, AND SCENES</h3>
+
+    <p>Ongoing games of Lancer are usually divided into missions, each of which might encompass one play session or several, separated by periods of downtime.
+
+    <p>Missions have specific goals or objectives that can be completed within a discrete amount of time: destroying a building, breaking into a secure facility to recover vital data, evacuating civilians, uncovering a conspiracy, or holding the line against enemy attack, for example. Missions also provide some preparation time in which you can establish goals, stakes, and equipment for your characters.
+
+    <p>If your character isn’t on a mission, you’re in downtime. This is the narrative space between missions, in which moment-to-moment action doesn’t matter as much and roleplaying matters much more. During downtime you can progress plots, projects, or personal stories, moving the clock forward as much or as little as you want. Days, months, and even years can pass in downtime, depending on the pace of your game.
+
+    <p>In both missions and downtime, play is divided into scenes. A scene is a period of continuous dialogue, action, or activity that has a discrete starting and stopping point. This is called a scene because it’s helpful to think about it in cinematic terms: as long as the focus (or ‘camera’) is on the players and their action, a scene is happening. When the focus cuts away from the current scene, or the current action naturally ends, that’s when the scene should end too.
+
+    <p>A single combat encounter or a dialogue between characters are both great examples of scenes, but a scene can also be something like a montage.
+
+    <p>It’s important to pay attention to the beginning and end of scenes, as many special character and mech abilities end or reset at the end of a scene.
+
+    <h1>SECTION 1: BUILDING PILOTS AND MECHS</h1>
+
+    <h2>LICENSE LEVELS</h2>
+
+    <p>Unlike in other roleplaying games, in <i>Lancer</i> you don’t need to track currency. Your access to mechs, gear, upgrades, talents, and other character options is instead restricted by licenses. Licenses represent access to the valuable information, resources, and authority required to acquire mech gear and parts. They are tightly controlled by the major powers in <i>Lancer</i> and allow their holders unlimited access to their included gear.
+
+    <p>In <i>Lancer</i>, your pilot progresses by completing missions and gaining license levels (LL). Your LL applies to both your pilot and your mech – as you level up, both parts of your character become stronger and gain access to more advanced gear and combat techniques. Increasing it allows you to unlock new manufacturer licenses, opening the door to exclusive gear and mechs. Leveling up also allows your pilot to improve their triggers, mech skills, and GRIT, and lets you choose talents to further customize your play style.
+
+    <p>A new pilot typically starts at LL0 – an inexperienced rookie – and levels up to LL1 after their first mission, then again after each subsequent mission to a maximum of LL12.
+
+    <p>This section includes a lot of information that is expounded upon later in the book. Feel free to skip over it for now and reference back when needed if this is your first time reading through the book.
+
+    <h3>LL0</h3>
+
+    <p>New players should usually create characters at LL0. Even at this level, your pilot has access to an extensive range of bonuses and gear.
+
+    <p>LL0 characters start with the following:
+
+    <ul>
+      <li>A background, which provides bonuses on skill checks (p. 20).
+      <li>Four +2 pilot triggers (p. 25).
+      <li>One +2 mech skill or two +1 mech skills.
+      <li>Three rank 1 talents (p. 90).
+      <li>A license for all General Massive Systems (GMS) gear and weapons, and one mech FRAME - the GMS-SP1 Everest (p. 118).
+    </ul>
+
+    <h3>LEVELING UP</h3>
+
+    <p>When characters complete a mission, whether they succeeded or failed, their LL increases by one and they add:
+    <ul>
+      <li>+2 to an existing trigger or a new trigger at +2.
+      <li>+1 to a mech skill.
+      <li>+1 talent rank to choose a new talent or improve an existing one.
+      <li>+1 license rank to spend on mech talents and licenses.
+    </ul>
+
+    <p>Leveling up naturally increases a pilot’s GRIT, which is equal to 1/2 a pilot’s total LL, rounded up. Pilots gain their first point of GRIT at LL1.
+
+    <p>At every third LL (3, 6, 9, and 12), pilots also get to choose a new core bonus – a powerful improvement to all mechs they build.
+
+    <h3>REALLOCATING POINTS</h3>
+
+    <p>Every time your pilot’s LL increases, you also have the option to choose one:
+    <ul>
+      <li>Reallocate all ranks from one of your talents to any other talent.
+      <li>Reallocate all ranks from one of your licenses to any other license.
+      <li>Replace one core bonus with another core bonus for which your pilot qualifies.
+    </ul>
+
+    <p>If reallocating ranks from one license to another means your pilot no longer qualifies for a core bonus, you must replace that core bonus with one you now qualify for.
+
+    <h3>LEVEL CHART</h3>
+
+    <table>
+      <tr>
+        <th>LL</th>
+        <th>GRIT</th>
+        <th>SKILL POINTS<br>(max +6)</th>
+        <th>LICENSE RANKS</th>
+        <th>TALENT RANKS</th>
+        <th>CORE BONUSES</th>
+        <th>TRIGGER POINTS<br>(max +6)</th>
+      </tr>
+      <tr>
+        <th>0</th>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td>1</td>
+        <td>3</td>
+        <td>1</td>
+        <td>4</td>
+        <td>0</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>1</td>
+        <td>4</td>
+        <td>2</td>
+        <td>5</td>
+        <td>0</td>
+        <td>12</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>2</td>
+        <td>5</td>
+        <td>3</td>
+        <td>6</td>
+        <td>1</td>
+        <td>14</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <td>2</td>
+        <td>6</td>
+        <td>4</td>
+        <td>7</td>
+        <td>1</td>
+        <td>16</td>
+      </tr>
+      <tr>
+        <th>5</th>
+        <td>3</td>
+        <td>7</td>
+        <td>5</td>
+        <td>8</td>
+        <td>1</td>
+        <td>18</td>
+      </tr>
+      <tr>
+        <th>6</th>
+        <td>3</td>
+        <td>8</td>
+        <td>6</td>
+        <td>9</td>
+        <td>2</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <th>7</th>
+        <td>4</td>
+        <td>9</td>
+        <td>7</td>
+        <td>10</td>
+        <td>2</td>
+        <td>22</td>
+      </tr>
+      <tr>
+        <th>8</th>
+        <td>4</td>
+        <td>10</td>
+        <td>8</td>
+        <td>11</td>
+        <td>2</td>
+        <td>24</td>
+      </tr>
+      <tr>
+        <th>9</th>
+        <td>5</td>
+        <td>11</td>
+        <td>9</td>
+        <td>12</td>
+        <td>3</td>
+        <td>26</td>
+      </tr>
+      <tr>
+        <th>10</th>
+        <td>5</td>
+        <td>12</td>
+        <td>10</td>
+        <td>13</td>
+        <td>3</td>
+        <td>28</td>
+      </tr>
+      <tr>
+        <th>11</th>
+        <td>6</td>
+        <td>13</td>
+        <td>11</td>
+        <td>14</td>
+        <td>3</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <th>12</th>
+        <td>6</td>
+        <td>14</td>
+        <td>12</td>
+        <td>15</td>
+        <td>4</td>
+        <td>32</td>
+      </tr>
+    </table>
+
+    <h2>THE PILOT</h2>
+
+    <p>Your pilot is the person inside the machine; the character whose entire career you’ll be playing out. Lancers are generally interesting people – if they weren’t, you probably wouldn’t be playing them! As you create your character, you will be able to figure out who they are and what makes them so interesting.
+
+    <p>Creating your pilot is a fairly simple process. To begin with, you just need to choose a background and four triggers. After that, you can figure out your pilot’s other bonuses, statistics and gear before embarking on a mission.
+
+    <h3>BACKGROUNDS</h3>
+
+    <p>Your pilot’s background describes their life before they became a mech pilot. It doesn’t necessarily determine your pilot’s current role – indeed, your pilot might reject their old lives, wanting nothing to do with their history even as it affects them in the present – but it tells your GM and fellow players a bit about who they were prior to entering their machine.
+
+    <p>Think of a background as a prompt to draw on when imagining your pilot’s full backstory. How did your pilot first become a soldier, a doctor, or a miner? And from there, how did they become the lancer they are now?
+
+    <p>When creating a character, you can choose a background from the list below, choose one randomly from the list by rolling 1d20, or just make one up yourself.
+
+    <h4>INVOKING BACKGROUNDS</h4>
+
+    <p>Outside of combat, you (or the GM) can invoke your pilot’s background to receive 1 ACCURACY or 1 DIFFICULTY on any skill check, if their background is relevant. For example, someone who was a colonist might get +1➕ when negotiating with other colonists, navigating the wilderness, or farming. A character born in space, however, might get +1➖ when doing the same things.
+
+    <p>If there is any disagreement, the rest of the group – excluding both yourself and the GM – arbitrates. If the other players can’t reach a consensus, the person who invoked the background decides.
+
+    <h4>DIASPORANS</h4>
+
+    <p>To be a Diasporan is to be a member of the largest class of humanity: world-bound people outside of the Galactic Core, who identify with single homeworlds they may never leave. Diasporans make up the vast bulk of the human population, settled and left to develop on their own during the First and Second Expansion Periods. The Diaspora includes everyone from the people of worlds proximal to the Core through to worlds that have lived without – or have never known – Union’s presence for thousands of years, and all other societies in between. Diasporan worlds can be covered in glittering or stinking metroswathes, mixed urban spaces, quiet ecological preserves, arcadian paradises, or lonely terrestrial barrens – any places humans or groups of humans can live. For better or for worse, the Diaspora is what people see when they think of “humanity”.
+
+    <h4>COSMOPOLITANS</h4>
+
+    <p>A Cosmopolitan is a person who lives the majority of their life in interstellar transit and keeps their ship as their home. Interstellar travel in Lancer occurs at or near the speed of light; existence at this relative speed necessarily means that Cosmopolitan humans live outside of the course of “real” time. To the humans of the Diaspora and the Core, these Cosmopolitans are almost eternal, seeming to live for generations. The histories, stories, and cultures of Cosmopolitans are separate from the bulk of humanity, their lives defined in relation and contrast to the windows of time they witness when they drop out of nearlight. To observers, the Cosmopolitan life might seem lonely or ahistorical, but Cosmopolitans have rich and storied histories, shared culture, and a vision of humanity as a whole that few others have access to or the ability to witness.
+
+    <h4>NHPs</h4>
+
+    <p>NHP stands for “non-human person” a name given to uncanny, incorporeal parallel-space beings, most of which were discovered and developed following the manifestation of MONIST-1/RA, though some have been created since then. NHPs fill the role once occupied by machine-mind AIs: under supervision, they manage whole cities and systems, work alongside scientists and engineers, and act as companions and co-pilots for mech pilots and starship captains. They are black-box paracausal entities – their promulgation tightly controlled and monitored by Union – but their use is widespread. NHPs are increasingly regarded as fundamental infrastructure for any successful civic, scientific, or military endeavor.
+
+    <h4>BACKGROUNDS WITH TRIGGERS TABLE</h4>
+
+    <p><i>The full text of backgrounds from pg 21-24 has probing questions with heavy setting implications. They're good, but this document is intended to be SRD-lite, even by the game's own standards.</i>
+
+    <table>
+      <tr>
+        <th>1d20</th>
+        <th>Background</th>
+        <td>(trigger 1)</td>
+        <td>(trigger 2)</td>
+        <td>(trigger 3)</td>
+        <td>(trigger 4)</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <th>Colonist</th>
+        <td>Spot</td>
+        <td>Patch</td>
+        <td>Survive</td>
+        <td>Word on the Street</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <th>Mechanic</th>
+        <td>Hack or Fix</td>
+        <td>Blow Something Up</td>
+        <td>Get Somewhere Fast</td>
+        <td>Get a Hold of Something</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <th>Medic</th>
+        <td>Patch</td>
+        <td>Assault</td>
+        <td>Stay Cool</td>
+        <td>Read a Situation</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <th>Priest</th>
+        <td>Stay Cool</td>
+        <td>Take Control</td>
+        <td>Lead or Inspire</td>
+        <td>Read a Situation</td>
+      </tr>
+      <tr>
+        <th>5</th>
+        <th>Worker</th>
+        <td>Stay Cool</td>
+        <td>Lead or Inspire</td>
+        <td>Invent or Create</td>
+        <td>Word on the Street</td>
+      </tr>
+      <tr>
+        <th>6</th>
+        <th>Mercenary</th>
+        <td>Threaten</td>
+        <td>Take Control</td>
+        <td>Blow Something Up</td>
+        <td>Apply Fists to Faces</td>
+      </tr>
+      <tr>
+        <th>7</th>
+        <th>Scientist</th>
+        <td>Investigate</td>
+        <td>Invent or Create</td>
+        <td>Blow Something Up</td>
+        <td>Get a Hold of Something</td>
+      </tr>
+      <tr>
+        <th>8</th>
+        <th>Soldier</th>
+        <td>Assault</td>
+        <td>Pull Rank</td>
+        <td>Take Control</td>
+        <td>Blow Something Up</td>
+      </tr>
+      <tr>
+        <th>9</th>
+        <th>Spaceborn</th>
+        <td>Survive</td>
+        <td>Stay Cool</td>
+        <td>Hack or Fix</td>
+        <td>Get Somewhere Fast</td>
+      </tr>
+      <tr>
+        <th>10</th>
+        <th>Starship pilot</th>
+        <td>Show Off</td>
+        <td>Hack or Fix</td>
+        <td>Get Somewhere Fast</td>
+        <td>Get a Hold of Something</td>
+      </tr>
+      <tr>
+        <th>11</th>
+        <th>Criminal</th>
+        <td>Threaten</td>
+        <td>Take Control</td>
+        <td>Word on the Street</td>
+        <td>Apply Fists to Faces</td>
+      </tr>
+      <tr>
+        <th>12</th>
+        <th>Far-field team</th>
+        <td>Spot</td>
+        <td>Charm</td>
+        <td>Survive</td>
+        <td>Investigate</td>
+      </tr>
+      <tr>
+        <th>13</th>
+        <th>Hacker</th>
+        <td>Hack or Fix</td>
+        <td>Invent or Create</td>
+        <td>Act Unseen or Unheard</td>
+        <td>Get a Hold of Something</td>
+      </tr>
+      <tr>
+        <th>14</th>
+        <th>NHP specialist</th>
+        <td>Stay Cool</td>
+        <td>Investigate</td>
+        <td>Read a Situation</td>
+        <td>Invent or Create</td>
+      </tr>
+      <tr>
+        <th>15</th>
+        <th>Outlaw</th>
+        <td>Charm</td>
+        <td>Survive</td>
+        <td>Show Off</td>
+        <td>Take Someone Out</td>
+      </tr>
+      <tr>
+        <th>16</th>
+        <th>Penal colonist</th>
+        <td>Spot</td>
+        <td>Survive</td>
+        <td>Word on the Street</td>
+        <td>Apply Fists to Faces</td>
+      </tr>
+      <tr>
+        <th>17</th>
+        <th>Spec ops</th>
+        <td>Spot</td>
+        <td>Stay Cool</td>
+        <td>Take Someone Out</td>
+        <td>Act Unseen or Unheard</td>
+      </tr>
+      <tr>
+        <th>18</th>
+        <th>Super soldier</th>
+        <td>Assault</td>
+        <td>Read a Situation</td>
+        <td>Get Somewhere Fast</td>
+        <td>Apply Fists to Faces</td>
+      </tr>
+      <tr>
+        <th>19</th>
+        <th>Celebrity</th>
+        <td>Charm</td>
+        <td>Threaten</td>
+        <td>Pull Rank</td>
+        <td>Lead or Inspire</td>
+      </tr>
+      <tr>
+        <th>20</th>
+        <th>Noble</th>
+        <td>Show Off</td>
+        <td>Pull Rank</td>
+        <td>Lead or Inspire</td>
+        <td>Read a Situation</td>
+      </tr>
+    </table>
+
+    <h3>TRIGGERS</h3>
+
+    <p>As a central character in the story, your pilot will have moments when their background, training, and personality shine through. These moments are your pilot’s triggers: short phrases that describe key decisions and actions like Apply Fists to Faces or Get Somewhere Fast. Triggers are always accompanied by a bonus of +2, +4, or +6.
+
+    <p>When one of your character’s triggers is relevant to a skill check, you get a bonus to the roll. For example, if you have “+2 to Apply Fists to Faces” written on your sheet, any time your character acts in a way that could be construed as applying fists to faces, you get +2 to the skill check. You can only receive a bonus from one trigger at a time.
+
+    <p>Triggers apply to actions that depend on your pilot’s personal abilities, experience, training, or background – not actions that rely on their mech’s specifications. When taking actions that rely on a mech, mech skills are used instead.
+
+    <p>Triggers are almost always used in narrative play, and they never apply to attack rolls, saves, or any rolls other than skill checks.
+
+    <p>Triggers are usually fairly open-ended, allowing you to apply them in creative ways. That said, the GM is responsible for arbitrating outlandish claims. Be prepared to justify how your Apply Fists to Faces trigger helps you hack into an electronic network.
+
+    <h4>TRACKING TRIGGERS</h4>
+
+    <p>You only need to write down the triggers your pilot currently has. Choosing four +2 triggers at LL0, you might end up with a list like this:
+
+    <ul>
+      <li>+2 Threaten
+      <li>+2 Get Somewhere Fast
+      <li>+2 Lead or Inspire
+      <li>+2 Spot
+    </ul>
+
+    <p>Or you might write them on your sheet as “+2 to Threaten, Get Somewhere Fast, Lead or Inspire, and Spot”. That’s it!
+
+    <h4>MAKING SKILL CHECKS WITHOUT TRIGGERS</h4>
+
+    <p>Don’t forget, you don’t need a trigger to make a skill check. You can always roll 1d20 with no bonuses against a target number of 10.
+
+    <h4>CREATING TRIGGERS</h4>
+
+    <p>With GM approval, you can write your own triggers. Custom triggers can be more specific than the examples in this book – Kill in Cold Blood or Insult Someone, for instance – but they shouldn’t be more general. They should always apply to specific circumstances or actions.
+
+    <h3>EXAMPLE TRIGGERS</h3>
+
+    <p>When creating your character and leveling up, you can choose triggers from this list or you can use them as inspiration for writing your own. At LL0, your pilot gets four triggers at +2 each.
+
+    <ul>
+      <li>ACT UNSEEN OR UNHEARD: Get somewhere or do something without detection, but not necessarily quickly; hide, sneak, or move quietly; infiltrate a facility while avoiding patrols and cameras; perform sleight of hand without being seen or heard, including picking pockets, unholstering guns, and cheating at cards; wear a disguise.
+      <li>APPLY FISTS TO FACES: Punch someone in the face or fight in open, brutal unarmed combat, whether it’s a fist fight, a martial arts duel, or a huge brawl. Never subtle, clean, or quiet.
+      <li>ASSAULT: Take part in direct and overt combat; fight your way through a building packed with hostile mercenaries, trade shots over rain-slick trenches, fight in chaotic microgravity as part of a boarding action, or engage an enemy in the smoking urban rubble of a city under orbital bombardment. Loud, direct action.
+      <li>BLOW SOMETHING UP: Use explosives (improvised or otherwise), weapons, or good old-fashioned brawn to totally wreck something or turn it into an enormous fireball.
+      <li>CHARM: Convince a receptive audience or use leverage (money, power, personal benefit) to get your way: smooth-talk your way past guards, get people on your side, sway potential benefactors, talk someone down, mediate between two parties, or blatantly lie to someone. You can also use it when trying to impersonate someone.
+      <li>GET A HOLD OF SOMETHING: Acquire temporary or permanent allies, assets, or connections through wealth or social influence; obtain information, food, materials, or soldiers.
+      <li>GET SOMEWHERE QUICKLY: Get somewhere quickly and without complications, but not necessarily quietly: climb, drive, pilot, swim, or perform acrobatic maneuvers to take a more dangerous shortcut; fall safely from a great height; move gracefully in zero-g; chase, flee, outrun, or outpace a target; get somewhere faster than anyone else.
+      <li>HACK OR FIX: Repair a device or faulty system; alternatively, hack it wide open, or totally wreck, disable or sabotage it. You’re probably hacking or fixing when accessing or safeguarding secure electronic systems, including electronic door locks, computer systems, omninet servers, and so on.
+      <li>INVENT OR CREATE: Use tools and supplies to design or build something, either on the fly or over time; invent new devices, tools, or approaches to problems.
+      <li>INVESTIGATE: Research a subject, or study something in great detail: learn about a subject of historical relevance, or become well-read on a particular issue; investigate a mystery or solve a puzzle; locate a person or object through research and detective work.
+      <li>LEAD OR INSPIRE: Give an inspiring speech, or motivate a group of people into action; efficiently and effectively administer organizations like companies, ship crews, groups of colonists or mining ventures; effectively command a platoon of soldiers in battle, or maybe an entire army.
+      <li>PATCH: Apply medical knowledge to medicate, bandage a wound, staunch bleeding, suture, cauterize, neutralize poison, or resuscitate; alternately, diagnose or study disease, pathogens, or symptoms.
+      <li>PULL RANK: Pull rank on a subordinate: get information, resources, or aid from them, maybe against their will. Any time you are trying to coerce or convince someone who might respect your authority (military or otherwise), you might be pulling rank.
+      <li>READ A SITUATION: Look for subtext, motives, or threats in a situation or person: use intuition to discern someone’s motivations, learn who is really in charge, or find out who’s about to do something rash or stupid; get a gut feeling about a situation or person; sense if someone is lying to you.
+      <li>SHOW OFF: Do something flashy, cool, or impressive, usually – but not exclusively – with your weapon: shoot a tiny or rapidly moving target, shoot someone’s hat off or their weapon out of their hand, knock someone out by throwing a gun at them, perform an acrobatic flourish with a sword, throw a spear to pin a fleeing target to the ground.
+      <li>SPOT: Spot details, objects, or people that are hidden or difficult to make out: notice ambushes, hidden compartments, or disguised individuals; spy on targets from a distance; make out the details, shape, and quantity of objects, vehicles, mechs, or people in the distance; track people or vehicles.
+      <li>STAY COOL: Perform a task that requires concentration, dexterity, speed, or precision under pressure: pick a lock while your squad trades fire with encroaching guards, carefully disarm an explosive, or unjam a gun under fire.
+      <li>SURVIVE: Persevere through harsh, hostile, or unforgiving environments: the vacuum of space, frozen tundra, a pirate enclave, a crime-ridden colony, untamed wilderness, or scorching desert. Survival often involves journeys through the wilderness, navigation, or avoiding natural hazards like carnivorous wildlife, rockfalls, thin ice, or lava fields. You might also try to survive in artificial environments by navigating safely through a city or avoiding dangerous sections of a space station.
+      <li>TAKE CONTROL: Use force, violence, presence of will, or direct action to take control of something. The thing you take control of will usually be something concrete, like an object someone is holding – a gun or a keycard, maybe. You might also take control of a situation, forcing those present to listen, calm down, or stop whatever they’re doing.
+      <li>TAKE SOMEONE OUT: Kill or disable someone quickly and quietly, up close and personal or from a distance – probably before they even notice you’re there. If you’re looking down a sniper scope at a target, preparing to knock out a guard with a strategic nerve-pinch, quick-drawing during a gun duel, or dropping from a ceiling to slit a throat, you’re trying to take someone out.
+      <li>THREATEN: Use force or threats to make someone do what you want; name what you want someone to do and what you’re going to do to them if they don’t listen to you. Threatening someone could also involve blackmail, leverage, or something similarly nasty. Whatever form it takes, there’s probably no chance of repairing the relationship after you’ve threatened someone.
+      <li>WORD ON THE STREET: Get gossip, news, or hearsay from the streets, or from a particular social scene.
+    </ul>
+
+    <h3>PILOTS IN COMBAT</h3>
+
+    <p>You will mostly play as your pilot in narrative play, outside of their mech, but there are times you will need to know how your pilot functions in mech combat. They might need to bail out of their mech during a fight, or you might want to track your pilot’s HIT POINTS (HP) if they get injured during downtime. Although pilots operate on a different scale to mechs, they have some of the same statistics: SIZE, HP, EVASION, E-DEFENSE, and SPEED.
+
+    <ul>
+      <li>SIZE is how much space a character takes up on the battlefield.
+      <li>HP is how much damage a character can take before they go down.
+      <li>EVASION is how hard it is to hit a character with a weapon.
+      <li>E-DEFENSE is how hard it is to hit a character with electronic systems.
+      <li>SPEED is how many spaces a character can move at a time.
+    </ul>
+
+    <p>Pilots have the following statistics:
+
+    <ul>
+      <li>HP: 6 + GRIT
+      <li>SIZE: 1/2
+      <li>EVASION: 10
+      <li>E-DEFENSE: 10
+      <li>SPEED: 4
+    </ul>
+
+    <p>Their statistics (especially their HP) might also change if they’re wearing armor.
+
+    <h3>CREATING A PILOT</h3>
+
+    <p>To make the pilot part of your character at LL0, just follow these simple steps:
+
+    <ol>
+      <li>Choose a background: You can create a background yourself, choose from the list of backgrounds, or roll a dice to randomly select one. During narrative play, you can get bonuses by invoking your pilot’s background.
+      <li>Choose triggers: Choose four +2 triggers, based on your pilot’s background.
+      <li>Write down your pilot’s combat statistics: SIZE 1/2, 6 HP, 10 EVASION, 10 E-DEFENSE, and 4 SPEED.
+      <li>Choose gear: Before embarking on a mission, you’ll choose gear for your pilot from the gear list in the Compendium (p. 108). Pilots can have armor, up to two weapons, and up to three other pieces of gear.
+    </ol>
+
+    <h2>THE MECH</h2>
+
+    <p>Mechanized cavalry units – mechs – are the primary armored agents around which many states, agencies and militaries base their ground forces.
+
+    <p>Depending on their chassis, mechs stand anything from 3 to 15 meters tall. They are almost always bi-, quadru-, or hexapedal, and the majority have either one or two sets of arms capable of manipulating weapons and interacting with the environment. Some pilots prefer their mech’s weapon systems to be built directly into the chassis and in some cases – depending on the system’s size and power – this kind of integration might be a necessity. Most mechs are controlled by a single pilot, but some larger, highly advanced platforms require additional crew.
+
+    <p>Mechs are agile, quick, and responsive machines for their size. They can traverse most solid and vacuum environments and their mobility is often augmented by (or dependent on) maneuvering jets. Still, they’re heavy and reliant on internal cold fusion generators for power. Mech power plants are heavily shielded, reliable, and basically inexhaustible, but should a reactor be compromised the results are catastrophic.
+
+    <p>Mechs are common enough in construction, hazardous materials cleanup, exploration, and other roles that they don’t shock the average person. Mechanized cavalry, though, are different: they’re military machines that often have a lancer behind the controls - a pilot on the same level as the knights or flying aces of old.
+
+    <h3>MECH SKILLS</h3>
+
+    <p>Mechs operate on an entirely different level to anything else in Lancer. They’re powered, armored hulks of incredible strength, packed full of advanced systems and weapons. A mech is capable of far more than a person on foot. They grant their pilots the ability to perform feats of incredible strength, speed, and resilience when skill alone isn’t enough.
+
+    <p>Your lancer has four mech skills that represent their ability to build, pilot, and fight with mechs:
+
+    <ul>
+      <li>HULL describes your ability to build and pilot durable, structurally sound mechs that can take punches and keep going.
+      <li>AGILITY describes your ability to build and pilot fast, evasive mechs.
+      <li>SYSTEMS describes your ability to build and pilot advanced mechs with powerful electronic warfare capabilities.
+      <li>ENGINEERING describes your ability to build and pilot mechs with effective reactors, supplies and support systems.
+    </ul>
+
+    <p>Mech skills go from +0 to +6 and are used...
+
+    <ul>
+      <li>...instead of triggers when you make skill checks that directly utilize a mech (e.g., if you wanted to punch something with a mech, you would roll HULL instead of a pilot trigger like ‘Assault’).
+      <li>...in mech combat, especially when making saves.
+      <li>...for additional bonuses when building a mech.
+    </ul>
+
+    <p>When you make a roll that calls for one of these skills, you add the relevant skill to your roll.
+
+    <ul>
+      <li>Roll HULL when: smashing through or pulverizing obstacles, vehicles, or buildings; lifting, dragging, pushing, or hurling an enormous amount of weight; grabbing or wrestling mechs, starships, or mech-sized creatures; resisting a huge amount of force; or, staying upright in cataclysmic weather.
+      <li>Roll AGILITY when: chasing, pursuing, or fleeing with incredible speed; performing acrobatics in your mech; hiding or moving silently; performing a feat of fine manual dexterity with your mech; or, dodging out of the way of danger.
+      <li>Roll SYSTEMS when: infiltrating hardened and powerful electronic systems and targets, including other mechs; boosting or suppressing a signal; engaging in electronic warfare; scanning or analyzing information; boosting or weakening the electronic systems of vehicles, mechs, starships, or bases; interacting safely with electronic life forms; or, analyzing the nature of unfamiliar electronic systems.
+      <li>Roll ENGINEERING when: pushing your mech past its limits; withstanding extreme conditions such as heat, cold, void, or radiation; using your mech’s reactor like a forge; keeping your mech running well past its breaking point or for extreme amounts of time; traveling or moving safely through hazardous or hostile conditions; boosting the reactor output of other mechs, starships, or bases; or, conserving and efficiently using ammo, power, and other resources.
+    </ul>
+
+    <h3>MODULAR MECHS</h3>
+
+    <p>Mechs are powerful machines, but what makes them more powerful – and your character more unique than other pilots – is your ability to source and combine mech weapons, parts, and gear from many different manufacturers. Mechs in Lancer are modular: each FRAME comes with a list of license-restricted gear that, once unlocked, can be freely swapped between all of your mechs. Because of this customizability, pilots are as much experts at building their machines as they are piloting them.
+
+    <p>Your pilot’s access to more and better parts increases with their LL. When your pilot’s LL increases (up to a maximum of 12), you gain +1 license rank that you can spend on a license from a mech manufacturer. Manufacturers offer a range of different licenses, all of which have three tiers – rank I, rank II, and rank III – that must be bought in order.
+
+    <p>Every new rank you obtain unlocks various systems, weapons, and even mechs. At rank II, you get a new mech FRAME, and rank III gives you access to the most advanced components. These weapons and systems are interchangeable – you can add as many to your mech as its FRAME can support, from any license rank you have unlocked.
+
+    <p>For example, an LL5 character with licenses for the IPS-N Raleigh III and the SSC Metalmark II has access to every piece of gear from ranks I–III of the Raleigh license, and all the gear from ranks I and II of the Metalmark license. They could take the Raleigh’s rank I HAND CANNON and put it on the Metalmark FRAME, or take the Metalmark’s RAIL RIFLE and put in on the Raleigh, mixing and matching as they choose.
+
+    <h3>GENERAL MASSIVE SYSTEMS</h3>
+
+    <p>All pilots, even at LL0, have access to the GMS-SP1 Everest FRAME and the GMS gear list. At first, this will be the only gear available to you – until your character gains some LLS and unlocks new licenses. GMS parts are galactic standards, useful for even high-LL pilots.
+
+    <h3>WITHOUT LIMITS</h3>
+
+    <p>You never lose access to mechs or gear that you’re licensed to use. Your pilot is assumed to almost always have access to it by one means or another, whether influence, patronage, wealth, or rank.
+
+    <p>Accessing licensed equipment is made even easier by advancements in 3D printing. In Lancer, it’s possible to print entire mechs wholesale. Even if your mech is destroyed in battle, you can easily print a replacement during downtime.
+
+    <h2>MECH STRUCTURE</h2>
+
+    <p>Most mechs have two arms and two legs, but you can modify this basic structure however you choose within reason – just ask your GM. Your mech’s overall look, structure, and layout have no bearing on gameplay.
+
+    <p>Let’s go through each mech component in detail.
+
+    <h3>FRAMES</h3>
+
+    <p>The basic structure and components of a mech – its chassis, armor, and mounts – is called its FRAME. A mech’s FRAME determines its appearance, size, and function, defining it as anything from a heavy siege engine to an agile flier, or even a cloaking mech that specializes in electronic warfare. These effects are expressed by a FRAME’S traits. Think about choosing a FRAME as (more or less) choosing the mech your character is going to pilot. But remember that you’re not limited to just one FRAME – you can acquire new ones by unlocking rank II licenses.
+
+    <p>In game terms, a FRAME is a mech’s modular base. It determines your mech’s SIZE, ARMOR, and other specifications, as well as its available weapon mounts and capacity for additional systems.
+
+    <p>Each FRAME also comes with a unique CORE SYSTEM, a powerful special ability that can typically only be used once per mission.
+
+    <h3>SIZE</h3>
+
+    <p>All mechs, characters, and objects on the battlefield have a SIZE that describes how large they are, in grid spaces, on each side (rounded up to 1 if smaller, so a SIZE 1/2 and SIZE 1 character occupy the same space). SIZE is an abstract measurement – it doesn’t describe a precise height and width in feet, but the space a character controls around them. Humans and the smallest mechs are SIZE 1/2. Most mechs are SIZE 1, but some are as large as SIZE 3.
+
+    <h3>ARMOR</h3>
+
+    <p>A mech’s ARMOR reduces all incoming damage by that amount, excluding some special types of damage. ARMOR mostly depends on your mech’s FRAME, and never goes above four.
+
+    <h3>MOUNTS</h3>
+
+    <p>Mechs can only carry a limited number of weapons, determined by their FRAME. Trying to install too many weapons – and their supporting systems – places far too much stress on the mech’s structure and reactor.
+
+    <p>Each mech FRAME has a different number and different types of mounts. To add a weapon to your mech, you need an available mount of the right type and size. You can, however, add smaller weapons to larger mounts. For example, you could add a main or auxiliary weapon to a heavy mount or add two auxiliary weapons to a main/auxiliary mount.
+
+    <p>FRAMES can have the following types of MOUNTS:
+
+    <ul>
+      <li>Main mounts can take one MAIN or AUXILIARY weapon.
+      <li>Heavy mounts can take one HEAVY, MAIN, or AUXILIARY weapon.
+      <li>Aux/aux mounts can take up to two AUXILIARY weapons.
+      <li>Main/aux mounts can take one MAIN weapon and one AUXILIARY weapon, or two AUXILIARY weapons.
+      <li>Flexible mounts can take either one MAIN weapon or up to two AUXILIARY weapons.
+      <li>Integrated mounts are designed around specific weapons, built into FRAMES. They automatically include the listed weapons, which cannot be destroyed, removed, replaced, or modified in any way.
+      <li>Superheavy weapons, which are especially large, require both a HEAVY mount and one other mount of any size.
+    </ul>
+
+    <p>Weapons mounted on a mech aren’t necessarily attached to the chassis – they can be slung in holsters, built into compartments, or held normally. You can decide how your mech’s weapons are mounted – it has no effect on the rules.
+
+    <h3>WEAPONS</h3>
+
+    <p>Mech weapons have three traits: size, type, and damage.
+
+    <h4>SIZE</h4>
+
+    <ul>
+      <li>Auxiliary weapons are the smallest mech weapons, light enough to use alongside larger weapons.
+      <li>Main weapons are the standard size for mech weapons.
+      <li>Heavy weapons are larger, heavier weapons used to inflict massive damage.
+      <li>Superheavy weapons are very large weapons with high power requirements; they are usually rare or highly advanced.
+    </ul>
+
+    <h4>TYPE</h4>
+
+    All weapons have a type that describes their general range and combat function.
+
+    <ul>
+      <li>Melee weapons are mech-scale swords, axes, power tools, and other hand-to-hand weapons. A mech’s raw strength can turn even crude tools into forces to be reckoned with.
+      <li>CQB (close quarters battle) weapons are those designed for close-range combat, including pistols, shotguns, flamethrowers, and more exotic weapons like nailguns. They usually have short range but are better for reacting quickly to emergent threats.
+      <li>Rifles are sturdy weapons with good range and stopping power.
+      <li>Launchers are weapons that fire missiles, grenades, or other projectiles.
+      <li>Cannons are high-caliber weapons useful for inflicting heavy damage on enemies. What they lack in precision, they usually make up for in power.
+      <li>Nexus weapons are reservoirs and projectors for swarms of self-propelled, armed drones.
+    </ul>
+
+    <p>Note: CQB, RIFLES, LAUNCHERS, CANNONS and NEXUS weapons are Ranged Weapons, and always make Ranged Attacks even against targets within their THREAT.
+
+    <h4>DAMAGE</h4>
+
+    <p>Most weapons deal one of three kinds of damage: kinetic🛡️, explosive💥, or energy⚡. Some special weapons also deal heat🌡️ (harm to a mech’s internal systems) or burn🔥 (damage over time), which are explained in the Harm section (p. 67).
+
+    <h3>SYSTEM POINTS</h3>
+
+    <p>Mech FRAMES also have a set number of SYSTEM POINTS (SP). SP can be spent to add extra systems to your mech, and some heavier weapons require both mounts and SP. You cannot add systems to your mech that would cause you to exceed your available SP.
+
+    <p>Your pilot’s GRIT, equal to half their LL, is added to your total SP, and you gain an additional SP for every two points of SYSTEMS.
+
+    <h3>CORE SYSTEMS</h3>
+
+    <p>Every FRAME comes with a CORE SYSTEM. These powerful abilities are unique to each FRAME, can’t be transferred to other mechs, and in most cases can only be used once a mission by consuming CORE POWER (CP).
+
+    <p>CP refers to a reservoir of high-efficiency reactor power, designed to be used in a quick burst. This reservoir is essential to the high-powered systems many mechs use in emergency situations and heavy action.
+
+    <p>At any given time, a mech either has CP or it doesn’t. There’s no way to save it up or store extra CP, aside from some rare equipment. Instead, you get CP when you start a mission or your mech receives a FULL REPAIR. Sometimes, if you’re lucky, the GM might grant you CP during a mission.
+
+    <h3>BASE STATISTICS</h3>
+
+    <p>Different FRAMES have different starting statistics, giving them unique roles in combat.
+
+    <ul>
+      <li>HP AND STRUCTURE: Like your pilot, your mech has hit points (HP). Your mech, however, isn’t destroyed when it reaches 0 HP. Mechs have 4 STRUCTURE – when they reach 0 HP, they take 1 structure damage and their HP resets. When they lose STRUCTURE like this, mechs have to make a special structure damage check and receive a consequence based on the roll. Most mechs have 4 STRUCTURE and are destroyed when they reach 0 STRUCTURE.
+      <li>REPAIR CAP: REPAIRS are a kind of currency that you can use to heal and repair your mech. If your mech runs out of REPAIRS, you can no longer regain HP or fix damaged systems in the field.
+      <li>SPEED: Your mech’s SPEED determines how far you can move on your turn, in spaces, when you make a standard move or BOOST.
+      <li>EVASION: EVASION is how hard it is for ranged and melee attacks to hit you.
+      <li>SENSORS: Your mech’s SENSORS is the maximum distance (in spaces) over which a mech can detect enemies, use tech systems, and make tech attacks. If a character is within your SENSORS and isn’t hiding, you know they’re there – even if you can’t directly see them.
+      <li>TECH ATTACK: You add your mech’s TECH ATTACK as a bonus instead of GRIT when you conduct electronic warfare.
+      <li>E-DEFENSE: E-DEFENSE is how hard it is for electronic and guided weapons and systems to hit you.
+      <li>HEAT CAP AND STRESS: Your mech can take heat from tech attacks and some of its own systems. If it takes more heat than its HEAT CAP, it overheats. Mechs also have STRESS, which is similar to STRUCTURE – when they exceed their HEAT CAP, they take 1 stress damage and clear all heat. When they lose STRESS like this, mechs have to make a special stress damage check and receive a consequence based on the roll. Most mechs have 4 STRESS, and are destroyed when they reach 0 STRESS.
+      <li>SAVE TARGET: When you force another character to make a save, they must match or beat your mech’s SAVE TARGET or take consequences.
+    </ul>
+
+    <h4>IMPROVING MECHS</h4>
+
+    <p>When your pilot builds a mech, their mech skills allow you to boost some of its statistics. This is your pilot’s unique or personal touch, giving you the ability to customize a stock FRAME.
+
+    <p>Your pilot’s GRIT is added to your mech’s HP and SAVE TARGET, as well as its SP and attack rolls.
+
+    <p>Your pilot’s HULL affects your mech’s durability. You gain:
+    <ul>
+      <li>+2 HP for each point of HULL.
+      <li>+1 REPAIR CAP for every two points of HULL.
+    </ul>
+
+    <p>Your pilot’s AGILITY affects your mech’s maneuverability. You gain:
+    <ul>
+      <li>+1 EVASION for each point of AGILITY.
+      <li>+1 SPEED for every two points of AGILITY.
+    </ul>
+
+    <p>Your pilot’s SYSTEMS affects your mech’s systems and electronic warfare abilities. You gain:
+    <ul>
+      <li>+1 E-DEFENSE and TECH ATTACK for each point of SYSTEMS.
+      <li>+1 SP for every two points of SYSTEMS.
+    </ul>
+
+    <p>Your pilot’s ENGINEERING affects heat management and ease of repair. You gain:
+    <ul>
+      <li>+1 HEAT CAP for each point of ENGINEERING.
+      <li>+1 to the maximum uses of any limited systems or weapons for every two points of ENGINEERING.
+    </ul>
+
+    <h3>CORE BONUSES</h3>
+
+    <p>As your pilot acquires more licenses, they gain knowledge and skills specific to individual manufacturers and their design philosophies. This specialized knowledge is represented by core bonuses, unique enhancements that offer interesting ways to customize your mech.
+
+    <p>Core bonuses are permanent improvements that apply to any FRAME your pilot uses. You cannot choose the same core bonus more than once, but as your pilot progresses, you will be able to choose a range of different bonuses.
+
+    <p>Your pilot gets a new core bonus every three LLS. You can always choose core bonuses from the GMS list, but for each core bonus you choose from another manufacturer, you first need to have three license ranks with that manufacturer. For example, to choose a core bonus from IPS-Northstar (IPS-N) you would need at least three ranks in IPS-N licenses; if you wanted to choose a second IPS-N bonus, you would need at least six ranks in licenses. These ranks can be in any combination – for example, you might have the rank I and rank II license for one mech and three different rank I licenses, equaling six in total.
+
+    <h3>TALENTS</h3>
+
+    <p>Your pilot’s ingenuity and experience piloting a mech are represented by talents – special enhancements that can help pilots push mechs past their limits. Talents give your pilot benefits or abilities with specific weapon types, systems, or styles of play, allowing you to further define them within the rules and story. With a few exceptions, talents only affect your character’s capabilities as a mech pilot.
+
+    <p>Talents, like licenses, are measured in ranks: from rank I to rank III. At LL0, you start with three rank I talents of your choice. When your pilot levels up, you can either increase a talent to the next rank (i.e., from rank I to rank II) or choose a new talent at rank I.
+
+    <p>You can read the full list of talents and their effects in the Compendium on p. 90.
+
+    <h3>CREATING A MECH</h3>
+
+    <p>Constructing and customizing a mech may seem daunting at first, but broken down into steps it’s much simpler than it seems.
+
+    <ol>
+      <li>Start by picking a FRAME from the licenses available to you. The FRAME gives your mech its base statistics. (At LL0, you only have access to the GMS-SP1 Everest.)
+      <li>Add bonuses from your mech skills. (At LL0, your character starts with two points to spend on mech skills.)
+      <li>Add GRIT to your mech’s HP, SP, attack rolls, and SAVE TARGET. (You get your first point of GRIT at LL1.)
+      <li>Pick weapons and allocate them to your FRAME’S available mounts. (Unless they have the Unique tag, you can take weapons more than once. At LL0, you can only choose from the GMS weapon list.)
+      <li>Choose systems up to your SP. (Unless they have the unique tag, you can take systems more than once. At LL0, you can only choose from the GMS systems list.)
+      <li>Write down your core bonuses, if any. (You choose your first core bonus at LL3.)
+      <li>Write down your relevant talents. (At LL0, you have three rank I talents.)
+    </ol>
+
+    <p>Remember, for step 2:
+
+    <ul>
+      <li>HULL: + 2 HP/point; +1 REPAIR CAP/2 points.
+      <li>AGILITY: +1 EVASION/point; +1 SPEED/2 points.
+      <li>SYSTEMS: +1 TECH ATTACK and E-DEFENSE/point; +1 SP/2 points.
+      <li>ENGINEERING: +1 HEAT CAP/point; +1 use for limited gear/2 points.
+    </ul>
+
+    <p>With that, you’re done!
+
+    <h1>SECTION 2: MISSIONS, UPTIME AND DOWNTIME</h1>
+
+    <h2>THE STRUCTURE OF PLAY</h2>
+
+    <p>In Lancer, play sessions are typically structured around missions: sorties, actions, or plans with at least one specific objective or goal.
+
+    <p>A mission always has a clear goal and stakes – you’ll establish both of these before you jump into the action. There’s something that needs doing, and it probably needs to be done fast. This creates a natural tension in the story that can only be resolved through the actions of the players. Without player intervention, the outcome will be radically different – usually for the worse!
+
+    <p>Each mission starts with these steps:
+
+    <ul>
+      <li>BRIEFING: The mission’s goal is established by the players or the GM, and GM sets the stakes.
+      <li>PREPARATION: Players build their mechs, pick pilot gear, and make any other preparations.
+      <li>RESERVES: Players establish the RESERVES they are bringing on the mission.
+      <li>BOOTS ON THE GROUND: The players arrive on the scene.
+    </ul>
+
+    <p>At the end of each mission – whether it was a success or otherwise – the pilots debrief, level up, and go to downtime, the narrative space between missions where they can undertake projects, progress their story, and prepare for the next mission. Missions, depending on their size, can last for a whole play session or even several. It’s possible, too – though unlikely – that your group could do multiple missions in a single session.
+
+    <p>The following sections explain each of these steps in a little more detail, starting with the structure of the first session.
+
+    <h2>THE MISSION</h2>
+
+    <h3>STAGE ONE: BRIEFING</h3>
+
+    <p>A mission briefing takes place at the beginning of every mission. This is when your pilots sit down around their consoles, or in their cockpits, a board room, or a barracks somewhere, and figure out – or get told – what needs to be done.
+
+    <p>This scene doesn’t have to be an actual in-character briefing. It can easily be a conversation between the players and the GM, taking place entirely out of character, especially if you need to figure out some details behind the scenes.
+
+    <p>The briefing needs to determine a couple of things: the situation, the mission goal, and the stakes.
+
+    <h4>THE SITUATION</h4>
+
+    <p>The GM should present as much information about the situation on the ground as they deem relevant to the players. This can be as in-depth or as short as needed, but make sure to establish clearly what the players know about the mission at the start of the mission.
+
+    <h4>THE GOAL</h4>
+
+    <p>Regardless of what information the GM presents, the goal is what the players hope to accomplish with their mission. This might be the same as any objectives set out by the GM, or it might be entirely different.
+
+    <p>For example, the GM might outline a mission in which the players have received orders from a powerful general to hold a loyalist checkpoint against rebels. If the players’ broad objectives align, then their goal might be to defend the checkpoint; however, maybe the players don’t like the general or secretly work for the rebellion, or maybe they know that letting the rebels through the checkpoint will be the perfect distraction for them to pursue their real mission. In any of those cases, their group’s goal – what the players hope to achieve – might be very different.
+
+    <p>Alternatively, the players might define a goal without any orders or any direction from the GM. They might decide that they want to clear out and secure a pirate-infested asteroid as a new base of operations for their mercenary company, in which case that would be their goal.
+
+    <p>A mission’s success depends on the completion of the goal(s), but missions can end without it. Indeed, some missions end so poorly that they leave players – or their factions – worse off than before they embarked. Whether or not a mission is successful, characters that survive a mission always increase their LL by one.
+
+    <p>It’s also possible for a mission’s goal to change mid-mission. Maybe more information comes to light, or there is a shift in the mission’s circumstances or parameters. This is perfectly normal and helps to create dynamic, interesting stories. The best-laid plans of pilots and commanders often break down under the entropy of combat. Pilots with more than a couple of live drops to their name know this and plan accordingly.
+
+    <h4>THE STAKES</h4>
+
+    <p>Once you’ve chosen a mission goal, it’s time to set the stakes – the mission’s possible outcomes and significance.
+
+    <p>The stakes are usually decided by the GM, but they can be strongly influenced by – or directly related to – the actions, history, drives, and backgrounds of player characters. For example, a character who was once a slave might have a much more personal stake in stopping slave traders due to their history.
+
+    <p>A mission’s stakes are easiest to find by phrasing them as a question, or several. Here are some examples:
+
+    <ul>
+      <li>Will the players save the new Frontier Shipping Clans settlement on Astrada IV from total destruction at the hands of the Iron Tigers? Will they learn who’s paying the Tigers?
+      <li>Will the players discover the location of the HORUS cell that has stolen a Harrison Armory HELBOX before they have a chance to activate it?
+      <li>Will the players successfully escort the Union emergency convoy through the raider-plagued Shatir Reef, or will the humanitarians be torn to pieces like so many others?
+      <li>Will the players be the first to discover the location of the atemporal artifacts buried beneath the planet’s surface, or will a rival acquisition team lock it down before them?
+    </ul>
+
+    <p>The precise details of the stakes for any given mission depend on the kind of narrative the GM is facilitating. They can be deeply personal, or broader. They can be immediate and brutal, or slow and gradual. Sometimes, the outcome of a mission can be as simple as surviving an impending attack, crash, or other desperate situation.
+
+    <p>It’s important to start a mission with both a goal and some stakes established. Not only does this give the characters clear motivations for why they’re embarking on a mission, but it also sets up the possible consequences of failure and allows the GM to push harder if that should come to pass – after all, you knew what the stakes were!
+
+    <h3>STAGE TWO: PREPARATION</h3>
+
+    <p>Once the brief is complete, players enter the preparation stage. In this stage, they choose the mechs and gear their pilots are taking into the field. Their decisions now aren’t necessarily final – they might have opportunities to change gear mid-mission – but it does determine the resources, gear, and weapons that they start with.
+
+    <p>Players can each bring one mech on a mission, along with clothing, armor, up to two weapons, and up to three other pieces of gear from the gear list. Take a look at the Compendium (p. 108) for the full list of pilot gear.
+
+    <p>In some cases, pilots might not be able to print or acquire new mechs and equipment during a mission. This can help create drama and exciting stories. For example, a group of pilots who crash-land in the middle of an alien wasteland while trying to find civilization probably won’t have reliable access to gear. Of course, pilots can always try to trade, barter, build, or acquire extra gear in the course of a mission.
+
+    <h3>STAGE THREE: RESERVES</h3>
+
+    <p>The last thing to do before starting a mission is for the players to establish the RESERVES that their pilots are bringing on this mission, or otherwise have access to in the field.
+
+    <p>RESERVES is an umbrella term for extra gear, ammunition, support, reinforcements, information, access, and everything else that the pilots have available to them during the mission. Reserves are typically acquired during downtime, but pilots can also be granted them in the field.
+
+    <p>There are no specific rules governing what counts as RESERVES and what can be brought on a mission. As long as the GM agrees that you can bring it with you, then it can be a reserve. Some examples of RESERVES (and how to acquire them) can be found in the section on downtimes later in the book (p. 50).
+
+    <p>Establishing RESERVES before the mission starts is important because it clearly shows players and the GM what resources are available from the beginning. This prevents unnecessary attempts to acquire items during the mission and arguments over who has access to what.
+
+    <h3>STAGE FOUR: BOOTS ON THE GROUND</h3>
+
+    <p>Once the parameters of a mission have been established – its goal and stakes clearly outlined, the characters briefed and prepared, and RESERVES identified – play immediately moves to the fourth stage: boots on the ground.
+
+    <p>In boots on the ground, the game cuts straight to the moment when the pilots arrive on the scene. The GM describes the situation and puts the pilots in the middle of it, ready to take action and respond. This jump cuts out unnecessary planning and stalling and cuts straight to the mission.
+
+    <p>Putting boots on the ground doesn’t necessarily involve throwing the pilots right into combat, and probably shouldn’t most of the time. Let’s say the players have embarked on a mission to escort a refugee caravan through a heavily guarded checkpoint manned by local partisans. The GM could decide to start the mission just as the caravan is ambushed, throwing the players right into combat, but instead they decide to start the mission as the players meet up with the caravan outside of the checkpoint, giving the players a little more time to establish the situation.
+
+    <p>Here are some other examples:
+
+    <ul>
+      <li>The mission is to infiltrate a crownmont – one of the premier’s city-fortresses – and open an obscure gate, allowing the rest of their team to sneak in and avoiding a siege. The GM decides that the mission starts with boots on the ground as the pilots creep toward the facility, advancing under the cover of night through ancient siege trenches, swept by klieg lights and enemy patrols.
+      <li>The mission is to scout for missing colonists on a newly founded colony planet. The GM decides the mission starts with boots on the ground as the pilots make their way through the jungle, just as they hear unearthly howls in the distance.
+      <li>The mission is to help guard a diplomatic summit; an R&R assignment gifted to them by their contract officer. The GM decides the mission starts with boots on the ground at the moment in the opening ceremony when the players see a suspicious figure dart away from the crowd.
+    </ul>
+
+    <h3>STAGE FIVE: ENDING A MISSION AND DEBRIEF</h3>
+
+    <p>Once a mission ends, successfully or otherwise, and the characters have a moment to breathe, it’s time for the debrief. Much like the briefing, the debrief doesn’t have to be an actual in-character meeting. It can easily be an out-of-character conversation among the people playing at the table.
+
+    <p>There are two things players should do during the debrief:
+
+    <h4>Level up</h4>
+
+    <p>All characters move up to the next LL, representing their improved access to resources, income, and clout.
+
+    <h4>Talk about the mission</h4>
+
+    <p>This isn’t a necessary step but can be helpful for players (and their characters) to think about what worked and what didn’t during the session. If there were any notable moments that were fun, interesting, or exciting it can be helpful to talk about them here as well. Not only is it good feedback for the GM but also can help validate your fellow players. If you’re going to take this step, remember to be respectful – every session has the potential to be someone’s first session or first experience with a situation, encounter, or choice. Roleplaying is collaborative, not competitive.
+
+    <h2>MISSIONS AND NARRATIVE PLAY</h2>
+
+    <p>Once you’ve got boots on the ground, you’re officially on a mission. It could last one session or several. You might abandon your original goal in favor of a new one, or encounter a twist in the story that throws your plans into disarray.
+
+    <p>From this point, the specifics of the mission are mostly up to the GM – there are no strong guidelines here about how to structure it! But in addition to explaining the rules governing narrative play, this section offers plenty of tools, advice, and aid for playing in and running a compelling mission.
+
+    <h3>NARRATIVE PLAY VS. MECH COMBAT</h3>
+
+    <p>The following section deals with narrative play. This part of a mission is more freeform than mech combat, which is a lot more structured. In narrative play, rolls tend to accomplish more, scenes cover larger stretches of time, and the outcome of individual rolls is more important.
+
+    <p>By contrast, mech combat is turn-based, tactical combat. Switching from narrative play to mech combat is as simple as the GM declaring it’s on, drawing a map, and picking who acts first. When you want to play out turn-based, tactical combat, you can swap to mech combat.
+
+    <p>These two modes of play have different rules, especially for combat. If a fight kicks off during narrative play, combat is resolved using skill checks, rather than attack rolls. There are no turns, and NPCs don’t get to act on their own initiative; instead, their actions are decided by the outcome of player rolls. In mech combat, outcomes are determined using turn-based, tactical play. Players make attack rolls, track HP and other effects, and NPCs can act independently.
+
+    <h3>MAKING SKILL CHECKS</h3>
+
+    <p>In narrative play, skill checks are used to determine the outcome of complicated situations and actions. They are only required in tense narrative situations and when making a roll will move the story forward. Your pilot will generally always succeed in mundane tasks, especially if it relates to their background. You don’t need to make a skill check to open a door, cook a meal, or talk to a superior officer – unless there’s something complicating your attempt, the outcome might further a situation or relationship in an interesting way, or it might answer a question.
+
+    <p>A barroom brawl, a tense escape, decoding an encrypted message, hacking a computer, talking down a pirate, picking someone’s pocket, distracting a guard, hunting alien wildlife, and flattering the planetary governor are all examples of situations that have some degree of tension and consequence, and might require a skill check.
+
+    <p>Skill checks can cover activities as broad or specific as the narrative requires. For example, a skill check might cover an entire day’s worth of infiltration into a covert facility, or you might instead roll for individual moments of action – sneaking into vents, hacking doors, disabling guards, and so on.
+
+    <p>Let’s break down the process of making a skill check:
+
+    <ol>
+      <li>Name your goal.
+      <li>The GM decides the consequences of failure (e.g., losing time, alerting the guards, getting shot, etc). If there are no consequences, then you automatically succeed.
+      <li>Determine which triggers activate, if any, and whether you or the GM are invoking your pilot’s background (+1 or +1 ).
+      <li>Roll 1d20 and add any relevant modifiers from triggers, ACCURACY, or DIFFICULTY. On a 9 or less, you fail to accomplish your goal and suffer the established consequences. On a 10+, you accomplish your goal.
+      <li>Only roll once to achieve your goal, and stick with the result (except when you want to push it; see below).
+    </ol>
+
+    <h4>TEAMWORK</h4>
+
+    <p>If people want to help someone carry out an action, only one character rolls as usual. The character that makes the skill check gains +1 (no matter how many people are helping), but everyone helping suffers any complications or consequences of failure.
+
+    <h4>DIFFICULT, RISKY, AND HEROIC ROLLS</h4>
+
+    <p>Before you roll a skill check, the GM can decide that the action you’re attempting is DIFFICULT or RISKY (or both). A DIFFICULT roll is harder than usual and adds +1 DIFFICULTY. A RISKY roll has clear and obvious complications, even on a success. For example, if a pilot is trying to sneak into a heavily guarded facility, the GM might decide the roll is RISKY – even if the pilot manages to sneak in, they’re likely to have limited time to sneak out. When rolling a RISKY skill check, a character always suffers the consequences (or a lesser version of them) on any result under 20. A RISKY skill check still succeeds as usual on 10+, but the character suffers consequences anyway.
+
+    <p>If an action is so hard that success seems outlandish, the GM can make it HEROIC. A HEROIC roll is only successful on a result of 20+, and the character making the attempt also suffers consequences if the result is less than 20. If the GM wants to push things even further, a HEROIC roll can also be DIFFICULT. Pilots that accomplish such tasks are the stuff of legend.
+
+    <p>The GM may always declare that a skill check can’t be made under the current circumstances. No matter how good your Apply Fists to Faces trigger is, you probably can’t punch through a starship hull with your bare hands.
+
+    <h4>TRYING AGAIN AND PUSHING IT</h4>
+
+    <p>An unsuccessful skill check doesn’t necessarily equate to outright failure, but it does mean that you have failed to accomplish your goal. If you do fail a check, you cannot attempt the same activity again unless the narrative circumstances have changed (e.g., time has passed, you have new gear, a different approach, or additional help, etc) or you push it.
+
+    <p>As long as a skill check isn’t RISKY, you can make a second attempt to achieve the goal of a failed skill check in the same circumstances. This is called pushing it. However, if you do this, the skill check immediately becomes RISKY. If the situation is already RISKY, you can’t push it further unless the GM allows it, in which case the skill check becomes HEROIC. A HEROIC check can never be pushed further.
+
+    <h4>CONSEQUENCES</h4>
+
+    <p>When you roll less than 10 on a skill check (or less than 20 on a RISKY skill check), you suffer the established consequences. Since NPCs don’t act on their own in narrative play, these complications and consequences are the main tools the GM has for responding to player action.
+
+    <p>Before a roll is made, the GM must outline the consequences of failure. They can only inflict consequences that are clearly established this way. The nature of the consequences depends on the skill check and situation. For example, if you’re trying to take someone out with a sniper rifle at 200 meters and they have no way to see you or fire back, it’s unlikely that failing the roll will immediately result in you being shot. If you’re in a melee struggling over someone else’s gun, the possibility of getting shot is much higher.
+
+    <p>Here are some examples of consequences or complications that might apply to a roll:
+
+    <ul>
+      <li>HARM: Damage, injury, or bodily harm. If you try to take control of the gun someone’s pointing at you and fail, you’re probably going to get hurt. Most of the time, established harm results in 1–2 damage, but getting shot at close range could cause 3–4 damage and truly deadly harm might cause 6 damage or more.
+      <li>TIME: The action takes longer than usual. In a calm environment, you can hack any console – and this one is no exception – but under fire and half-dressed, it’s going to take a lot longer.
+      <li>RESOURCES: Something must be used up, lost, or temporarily exhausted. This could be something concrete like running out of ammunition, losing a map, or your gun jamming, or it might be a social resource – reputation, political power, favor, and so on – that you need to spend in the process of completing your objective.
+      <li>COLLATERAL: Someone or something other than yourself or your intended target takes harm or injury, or is put in danger. This could be an innocent bystander, an ally, the whole building, or an organization you belong to.
+      <li>POSITION: Your actions put you in a worse position: right in the line of fire, clinging to the edge of a cliff, in the bad graces of the baron, or under a spotlight.
+      <li>EFFECT: Your action is less effective than intended. If you’re trying to kill someone, you merely injure them. If you’re trying to sneak away undetected, you make a lot more noise than you hoped. If you’re fixing a broken door, it only opens for a few people at a time.
+    </ul>
+
+    <p>And here are some examples of what these consequences might look like in practice:
+
+    <ul>
+      <li>HARM: A player makes a skill check to knock out someone who just drew a knife on them. They fail their roll, meaning they don’t knock their target out and they take a nasty slash for 2 damage.
+      <li>TIME: A player makes a RISKY skill check to charm the baron’s seneschal into granting them an audience. They succeed, but don’t get 20+: the baron lets them stew for a few hours, but finally meets with them. As a result, the players miss their appointment with a weapons broker.
+      <li>RESOURCES: A player makes a skill check to patch up an NPC’s wounds, and fails. Not only does the NPC bleed out and die, but the player runs out of medical supplies trying to treat them.
+      <li>COLLATERAL: A player fails a skill check to blow up a door. The door’s blown open, but the whole building starts to collapse.
+      <li>POSITION: While infiltrating a hidden base, a player makes a RISKY skill check to assassinate a target with a sniper rifle. They succeed but don’t get 20+. They kill their target but have to fire several times, alerting the entire base.
+      <li>EFFECT: A player makes a RISKY skill check to sabotage a security system and succeeds, but doesn’t get 20+. They only manage to shut it down for five minutes, giving their team limited time to act.
+    </ul>
+
+    <h4>SKILL CHALLENGES</h4>
+
+    <p>When a group of players are working together to achieve an objective, the outcome is determined by a skill challenge. Everyone involved makes a relevant skill check, and success is determined by the proportion of successful rolls. If more players succeed than fail, the challenge is a success; if more players fail than succeed, the challenge is a failure. If the same number of players succeed and fail, the success hangs on a razor’s edge – flip a coin or roll a dice to determine whether the challenge succeeds or fails.
+
+    <p>Here are some examples of skill challenges:
+
+    <ul>
+      <li>Infiltrating a guarded facility: Success means everyone gets into the facility unnoticed; failure means the guards are alerted.
+      <li>Gaining the baron’s favor: Success means the group receives a private audience with the baron; failure means they are thrown out by rival nobles who have noticed their meddling.
+      <li>Traversing the wastes: Success means they cross the wastes unharmed; failure means they cross the wastes, but it’s a harrowing journey and they arrive with no supplies, food, or water.
+      <li>Challenges are ideal when players (and GMs) want to extend the narrative impact of rolls.
+    </ul>
+
+    <p>For plans with several distinct stages, an extended challenge might be appropriate. An extended challenge has several rounds of rolling, and the outcome is calculated based on the number of rounds “won” by the players. For instance, an extended challenge with three rounds might require the players to gain the baron’s, plant information in the baron’s castle, and then sabotage the gate. The players are only truly successful if the majority of these tasks – two out of three, in this case – are accomplished.
+
+    <h3>PLAYER INITIATIVE & NPC ACTION</h3>
+
+    <p>In narrative play, players always have the benefit of initiative – the chance to act first. This means that the GM can’t ask for rolls until prompted by player action. To initiate a skill check, players must name a goal – what they hope to achieve – then the GM can ask for a roll and decide if it’s ordinary, DIFFICULT, RISKY, or HEROIC. After the roll is made and any consequences enacted, the players have the opportunity to act (or not) once more, probably with a ‘What do you do?’ from the GM.
+
+    <p>In practice, this lets players decide the course of action and ensures that each roll has clearly established stakes and parameters – it helps the game feel fairer and prevents unnecessary rolling.
+
+    <p>If the players fail to take action, stall, or pass off responsibility, then they are effectively turning initiative over to the GM. Any time the players look to the GM to see what happens next, the GM can move the story forward without player action.
+
+    <p>Similarly, NPCs don’t take action or make rolls in narrative play. Their behaviors are based on the outcome of player rolls. For example, if a player character lies to an NPC, the NPC doesn’t get to make a roll to figure out if they’re being lied to. As long as the player is successful, the NPC doesn’t see through the deception; if the player does fail, the NPC notices the obvious lies. If the GM feels like the NPC is particularly astute or insightful, able to easily see through lies, they might decide the skill check is DIFFICULT, RISKY, or both.
+
+    <h3>COMBAT IN NARRATIVE PLAY</h3>
+
+    <p>When combat takes place in narrative play, the normal rules for skill checks apply. This allows combat to play out more like a movie than a tactical game. When resolving combat narratively, you don’t need to track turns or make attack rolls, and the whole combat might be over in just a few rolls. If there are no mechs involved, it’s almost always preferable to resolve combat this way.
+
+    <p>Here are some examples of combat in narrative play:
+
+    <ul>
+      <li>Ava Rhys is negotiating with the Black Star Bandits, trying to secure the release of a hostage they’ve been contracted to rescue. The negotiations go sour when Ava fails her skill check to charm the bandit captain, and the bandits tell them to drop their weapons. Ava decides to shoot the closest bandit, hopefully giving her a chance to flee. Since she has the element of surprise, the GM decides the roll isn’t Risky. Ava rolls 15 on her skill check, gunning down the bandit and getting away with no complications.
+      <li>Daniel “Inky” Boyd “accidentally” gets in a bar fight. He wants to knock out the guy that just insulted his crew. The GM decides the roll isn’t Risky, but it is Difficult since the other guy is pretty big. Inky rolls a 7, failing to take out his opponent and getting clocked in the face for 1 damage.
+      <li>In the middle of a pitched battle, on foot, Khan decides to take control of the gun emplacement that’s raining hell down upon his allies. The GM decides this is a Risky venture. Khan gets a 9 on the roll, failing. The soldiers defending the emplacement turn the gun on him, preventing him from getting any closer. Worse, Khan watches as some members of his squad are gunned down in the ill-advised assault.
+      <li>Lin Yating, callsign “Marigold”, leads a platoon of troops in a jury-rigged escape pod on an attempt to board and take control of an enemy ship. The GM decides the maneuver is almost impossible but so daring that it deserves a Heroic roll. Marigold leads the charge, rolling a 21 against all odds. They successfully fight their way to the command center, and their enemies immediately surrender and hand over control of the ship.
+    </ul>
+
+    <p>Like other skill checks, failed combat skill checks can’t be repeated until the circumstances change. For example, if Taro gets in a bar fight and fails to knock out his opponent, he can’t try again until he changes his approach or the situation changes. He could do this several ways, such as by picking up a bar stool or getting some of his friends to help out.
+
+    <p>Don’t worry about calculating precisely how much damage is dealt to NPCs during narrative combat – if the pilot’s goal is ‘kill the guard’ and they succeed, they kill the guard. If an NPC is especially well-protected, trained, or otherwise hard to take out, the GM can make the roll RISKY or DIFFICULT, or else ask for a different approach. For example, trying to take out a guard in a tower with just a combat knife might be nearly impossible, but doing it with a silenced sniper rifle probably isn’t even RISKY.
+
+    <p>If you want combat in narrative play to be a bit more structured, you can use skill challenges, with different checks representing different parts of a fight. For example, the GM might ask players to make a skill check to cross open ground, assault the watch tower, then take out the turret that’s raining fire on them. If mechs are involved in combat or you want to get into serious detail, then you might be engaging in mech combat rather than narrative play.
+
+    <h4>HIT POINTS, DAMAGE, AND INJURY</h4>
+
+    <p>A pilot’s HP is most relevant during mech combat, but they can also get hurt and take damage as a result of complications during skill checks.
+
+    <p>At LL0, pilots have 6 HP. As they level up, they add their GRIT to their HP and can also get bonus HP from armor.
+
+    <p>HP doesn’t equate directly to a certain level of injury; it represents how far a pilot is from death, not only in terms of bodily health, but also in terms of their ability to duck, dodge, and avoid damage, and their sheer luck. A pilot who takes damage doesn’t necessarily sustain a physical injury. They might instead draw on their stamina, luck, or quick reflexes to avoid a wound, but they can’t do that forever.
+
+    <p>Consequences and complications from skill checks only deal damage if they would be sufficient, narratively, to hurt or kill someone. Things like minor grazes, a glancing punch, bruises, and so on don’t deal damage, although they could cause other issues.
+
+    <p>Here’s what damage to a pilot looks like in narrative play:
+
+    <ul>
+      <li>Minor damage is 1–2 damage. Minor damage might be a result of being shot by small arms fire, stabbed, punched, or being hit by a flying rock.
+      <li>Major damage is 3–5. Major damage might be dealt by assault and heavy weapons, long falls, toxic gas, or exposure to vacuum.
+      <li>Lethal damage is 6+. Lethal damage is catastrophic – a pilot might receive it if a mech falls on them, they’re hit by a mech-scale weapon, or a grenade blows up under them.
+    </ul>
+
+    <p>Pilots can have ARMOR of 1 or 2. Armor is subtracted from any damage they take, unless it’s dealt by an armor-piercing weapon (i.e. a weapon with the AP tag) or is caused by something particularly dramatic, like a long fall, immersion in lava, or exposure to a vacuum.
+
+    <h4>DOWN AND OUT</h4>
+
+    <p>If your pilot is ever reduced to 0 HP, roll 1d6:
+
+    <ul>
+      <li>On 6, your pilot barely shrugs off the hit (or it’s a close call) – they return to 1 HP.
+      <li>On 2–5, your pilot gains the DOWN AND OUT status (and the STUNNED condition) and remains at 0 HP. They are unconscious, pinned, bleeding out, or otherwise unable to act. If you’re in mech combat, they are Stunned and their EVASION drops to 5. If they take any more damage – from being shot in the head, for instance – they die.
+      <li>On 1, your pilot’s luck has run out – they die immediately.
+    </ul>
+
+    <p>On a roll of 2–5, you can choose for your pilot to die rather than becoming DOWN AND OUT.
+
+    <p>If a character spends an hour resting with no strenuous activity, they regain half of their maximum HP. If they’re DOWN AND OUT, they recover and come back to consciousness. It takes at least 10 hours and a FULL REPAIR to recover all HP.
+
+    <p>If your pilot dies, it might not be the end for them. Death is addressed in more detail in the section on mech combat.
+
+    <h2>DOWNTIME</h2>
+
+    <p>Pilots are people – exceptional people, but people nonetheless – who have lives to live outside of their mechs. It’s assumed in Lancer that your pilot has plenty of business to take care of between missions, although the precise nature of that business depends on the players, the GM, and the narrative.
+
+    <p>Some stories don’t have space for much downtime – perhaps the characters are on a planet under siege and have little time to pursue other projects. Others will have much more, potentially even skipping ahead several months between missions and allowing characters many opportunities to pursue their goals.
+
+    <p>There always has to be some downtime between missions, even if it’s only a few hours. This space allows players to prepare for the next mission and take actions that will shape the ongoing story.
+
+    <h3>STRUCTURED AND FREEFORM PLAY</h3>
+
+    <p>There are two components to downtime: structured downtime actions, and freeform play.
+
+    <p>Downtime actions are defined activities that allow players to accumulate RESERVES for the next mission. Each player gets a limited number of these actions – usually one, but sometimes two for especially long periods of downtime. If the players are under siege, for example, they probably only have time for a single action. The kinds of actions that characters can take are outlined below.
+
+    <p>But the purpose of downtime isn’t just to prepare for the next mission – it’s also for players to tell personal stories, advance plots, and flesh out characters. Players can do as much freeform roleplaying as they like during downtime – maybe making skill checks, maybe just talking and interacting. Even if their actions are totally unrelated to preparing for a mission, the GM can still feel free to reward this kind of play in ways that will help them in the field. For example, even if Pan and Penny simply go drinking at a bar together with no intent to prepare something, gain RESERVES, or take downtime actions, the GM might decide that their new bond grants them +1 ACCURACY on skill checks to help each other during the next mission.
+
+    <h3>TIME AND DOWNTIME</h3>
+
+    <p>Downtime is almost entirely narrative and doesn’t usually focus on every moment of action. Depending on the situation, one roll in downtime might cover any amount of time, from an hour to a few months. As a general rule, outcomes should be informed by narrative context. A roll made for an activity that takes place over several months will usually have a greater effect than an action that takes a few seconds. If a character only has a few days of downtime to learn a new martial art, they might not become an expert, but they will probably be familiar with the standard moves and techniques. If downtime skips ahead six months, though, that character might actually be a pretty good martial artist by the beginning of the next mission.
+
+    <h3>RESERVES</h3>
+
+    <p>Downtime can be used to prepare RESERVES for the next mission. RESERVES covers anything being held as an advantage for the next mission, including extra supplies, gear, support, bonuses, allies, and so on. The GM can grant RESERVES at any time it makes sense – for instance, when a group’s patron gives them extra supplies for a mission – but players can also ask for RESERVES by making downtime actions.
+
+    <p>Here are some examples of RESERVES in play:
+
+    <ul>
+      <li>WEAPONRY: I’ve borrowed a coldcore sniper rifle (a HEAVY SIGNATURE WEAPON) from the Triad, just for this job.
+      <li>BACKING: I have the Triad’s backing. If someone messes with me, I can invoke that.
+      <li>INFORMATION: Thanks to the Triad’s spy networks, I can ask the GM what kind of enemies we might run into during the mission.
+      <li>AMMO: I’ve recovered extra ammo cases, giving me +1 use for all limited weapons.
+      <li>NANOMATERIALS: I found some strange nanomaterials, giving my mech +2 REPAIR CAP this next mission.
+      <li>CONNECTIONS: I’ve got a lot of material I could use as leverage to get us a meeting with the local smuggling guild without having to make a skill check.
+    </ul>
+
+    <p>Over the next few pages are some examples of RESERVES. Some are relevant for mechs, some for pilots, and some for the story.
+
+    <p>Don’t take these examples as set in stone – they’re ideas for the kind of resources that might be available to a group of lancers. The type and quantity RESERVES available depends on the GM, player actions, and the story.
+
+    <p>While choosing RESERVES for a mission, if the GM is using a list – whether it’s one from this book or their own – it’s helpful for it to be visible to everyone. This ensures players have a good idea of what might be available to them. Of course, when rewarding RESERVES, the GM doesn’t necessarily have to pick from that list.
+
+    <p>Whatever they are, reserves can typically be used for the duration of the next mission only. Once that mission’s over, they're gone!
+
+    <p><i>The following was filtered down from three tables on pg 51-52.</i>
+
+    <ul>
+      <li>Accuracy: Training or enhancement that provides +1 ACCURACY to a particular mech skill or action for the duration of this mission.
+      <li>Ambush: Intel that allows you to choose exactly where your next battle will take place, including the layout of terrain and cover.
+      <li>Ammo: Extra uses (+1 or +2) of a LIMITED weapon or system.
+      <li>Bombardment: The ability to call in artillery or orbital bombardment once during mech combat (full action, RANGE 30 within line of sight, BLAST 2, 3d6 explosive damage).
+      <li>Boosted servos: IMMUNITY to the SLOWED condition.
+      <li>CORE battery: An extra battery that allows a second use of a mech’s CORE SYSTEM.
+      <li>Deployable shield: A single-use deployable shield generator – a SIZE 1 deployable that grants soft cover to all friendly characters in a BURST 2 radius.
+      <li>Environmental shielding: Equipment that allows you to ignore a particular battlefield hazard or dangerous terrain, such as extreme heat or cold.
+      <li>Extended Harness: A custom harness that allows you to carry an extra pilot weapon and two extra pieces of pilot gear for the duration of this mission.
+      <li>Extra repairs: Supplies that give a mech +2 REPAIR CAP.
+      <li>Jump jets: During this mission your mech can FLY when moving, but must end movement on land.
+      <li>NHP Assistant: A non-human person (NHP) – an advanced artificial intelligence – controlled by the GM, that can give you advice on the current situation.
+      <li>Orbital Drop: The ability to start the mission by dropping from orbit into a heavily fortified or hard to reach location.
+      <li>Redundant repair: The ability to STABILIZE as a free action once per mission.
+      <li>Reinforcements: The ability to call in a friendly NPC mech of any Tier, once per mission.
+      <li>Rented gear: Temporary access to a new weapon or piece of mech gear.
+      <li>Scouting: Detailed information on the kinds of mechs and threats you will face on the mission, such as number, type, and statistics.
+      <li>Smart ammo: All weapons of your choice can be fired as if they are SMART.
+      <li>Systems reinforcement: +1 ACCURACY to skill checks made with one skill – HULL, AGILITY, SYSTEMS or ENGINEERING.
+      <li>Vehicle: Use of a transport vehicle or starship (e.g., a TIER 1 NPC with the VEHICLE or SHIP template.
+    </ul>
+
+    <h3>DOWNTIME ACTIONS</h3>
+
+    <p>Downtime actions represent specific activities undertaken by pilots between missions. Unless the downtime takes place over an especially long period, players usually only get to make one downtime action per downtime.
+
+    <p>Unlike skill checks, downtime actions have specific outcomes depending on whether you succeed, fail, or roll 20+, and most ask you to choose from a list of possible outcomes. Even though downtime actions aren’t skill checks, triggers can still be used to get bonuses when rolling. For example, the GET A DAMN DRINK action might benefit from Survive (alcohol tolerance), Charm (impressing the locals), or Word on the Streets (eavesdropping for gossip).
+
+    <p>Although the outcomes of downtime actions depend on the roll, it’s up to the GM and player to flesh out the details using the provided prompts. You can go into as much detail as you want about what actually takes place.
+
+    <p>In addition to the downtime actions provided here, you can also easily create new ones that are more relevant to your particular game or story. Use these ones as starting points!
+
+    <h4>POWER AT A COST</h4>
+
+    <p>When you seek POWER AT A COST, you’re trying to get your hands on something.
+
+    <p>Name what you want. You can definitely get it, but depending on the outlandishness of the request, the GM chooses one or two:
+
+    <ul>
+      <li>It’s going to take a lot more time than you thought.
+      <li>It’s going to be really damn risky.
+      <li>You’ll have to have to give something up or leave something behind (e.g., wealth, resources, allies).
+      <li>You’re going to piss off someone or something important and powerful.
+      <li>Things are going to go wildly off-plan.
+      <li>You’ll need more information to proceed safely.
+      <li>It’s going to fall apart damn soon.
+      <li>You’ll need more resources, but you know where to find them.
+      <li>You can get something almost right: a lesser version, or less of it.
+    </ul>
+
+    <p>This is a straightforward way to acquire RESERVES, opportunities, and additional resources. You might want something directly useful for a mission; something more abstract, like time, safety, information, allies, or support; something practical, like a base of operations, materials, shelter, or food; or, even something as simple as a damn pack of cigarettes. You can also use POWER AT A COST during missions for similar effects. Other downtime actions generally can’t be used during missions, but your group can adapt them if desired.
+
+    <h4>BUY SOME TIME</h4>
+
+    <p>When you BUY SOME TIME, you try to stave off a reckoning, extend a window of opportunity, or merely buy some time and breathing room for you and your group. You might be trying to dodge some heat, survive stranded in the wilderness, or cause a distraction so another plan can reach its climax. You can use that distraction or bought time as RESERVES for the next mission.
+
+    <p>Describe your plan and roll:
+
+    <p>On 9 or less, you can only buy a little time, and only if drastic measures are taken right now. Otherwise, whatever you’re trying to stave off catches up to you.
+
+    <p>On 10–19, you buy enough time, but the situation becomes precarious or desperate. Next time you get this result for the same situation, treat it as 9 or less.
+
+    <p>On 20+, you buy as much time as you need, until the next downtime session. Next time you get this result for the same situation, treat it as 10–19.
+
+    <h4>GATHER INFORMATION</h4>
+
+    <p>When you GATHER INFORMATION, you poke your nose around, perhaps where it doesn’t belong, and investigate something – conducting research, following up on a mystery, tracking a target, or keeping an eye on something. You might head to a library or go undercover to learn what you can. Whatever it involves, you’re trying to GATHER INFORMATION on a subject of your choice. You can use information gained as RESERVES.
+
+    <p>Name your subject and method, and roll:
+
+    <p>On 9 or less, choose one:
+
+    <ul>
+      <li>You get what you’re looking for, but it gets you into trouble straight away.
+      <li>You get out now and avoid trouble.
+    </ul>
+
+    <p>On 10–19, you find what you’re looking for, but choose one:
+
+    <ul>
+      <li>You leave clear evidence of your rummaging.
+      <li>You have to dispatch someone or implicate someone innocent to avoid attention.
+    </ul>
+
+    <p>On 20+, you get what you’re looking for with no complications.
+
+    <h4>GET A DAMN DRINK</h4>
+
+    <p>When you GET A DAMN DRINK, you blow off some steam, carouse, and generally get into trouble. You might be trying to make connections, collect gossip, forge a reputation, or even just to forget what happened on the last mission. There’s usually trouble.
+
+    <p>State your intention and roll:
+
+    <p>On 9 or less, decide whether you had good time or not; either way, you wake up in a gutter somewhere with only one remaining:
+
+    <ul>
+      <li>Your dignity.
+      <li>All of your possessions.
+      <li>Your memory.
+    </ul>
+
+    <p>On 10–19, gain one as RESERVES and lose one:
+
+    <ul>
+      <li>A good reputation.
+      <li>A friend or connection.
+      <li>A useful item or piece of information.
+      <li>A convenient opportunity.
+    </ul>
+
+    <p>On 20+, gain two from the 10–19 list as RESERVES and don’t lose anything.
+
+    <p>You can only make this action where there’s actually a drink to get (e.g., in a town, station, city, or some other populated area), or some other kind of entertainment.
+
+    <h4>GET CREATIVE</h4>
+
+    <p>When you GET CREATIVE, you tweak something or try to make something new – either a physical item, or a piece of software. Once finished, you can use your new creation as RESERVES.
+
+    <p>Describe your project and roll:
+
+    <p>On 9 or less, you don’t make any progress on your project. Next time you get this result for the same project, treat it as a 10–19.
+
+    <p>On 10–19, you make progress on your project, but don’t quite finish it. You can finish it during your next downtime without rolling, but choose the two things you’re going to need:
+
+    <ul>
+      <li>Quality materials.
+      <li>Specific knowledge or techniques.
+      <li>Specialized tools.
+      <li>A good workspace.
+    </ul>
+
+    <p>On 20+, you finish your project before the next mission. If it’s especially complex, treat this as 10–19, but only choose one.
+
+    <p>Your project doesn’t have to be something from the gear list, but it usually can’t be as impactful as a piece of mech gear.
+
+    <h4>GET FOCUSED</h4>
+
+    <p>When you GET FOCUSED, you focus on increasing your own skills, training, and self-improvement. You might practice, learn, meditate, or call on a teacher.
+
+    <p>Name what you want to learn or improve (e.g., a skill, technique, academic subject, or language). The GM will give your pilot a new +2 trigger based on your practice and training. For example, the trigger could be +2 Playing Chess or +2 Dancing. You can also improve a trigger from +2 to +4 or +4 to +6 by taking this downtime action.
+
+    <p>This action can be used to learn something like starship piloting, cooking, chess, boxing, history, or etiquette. It should usually be a specific non-martial skill or something personal to your character.
+
+    <h4>GET ORGANIZED</h4>
+
+    <p>When you GET ORGANIZED, you start, run, or improve an organization, business, or other venture.
+
+    <p>State your organization’s purpose or goal, and choose a FOCUS: military, scientific, academic, criminal, humanitarian, industrial, entertainment, or political. It begins with +2 in either EFFICIENCY or INFLUENCE and +0 in the other, with a maximum of +6. EFFICIENCY determines how effectively your organization conducts activities within its scope (e.g., a military organization with high efficiency would be good at combat). INFLUENCE is its size, reach, wealth, and reputation.
+
+    <p>When your organization directly assists with an activity, you may add either its EFFICIENCY or INFLUENCE as a statistic bonus to your skill check. EFFICIENCY is used when performing activities related to your organization’s FOCUS. INFLUENCE is used when acquiring assets, creating opportunities, or swaying public opinion. Advantages gained with the help of your organization can be used as RESERVES.
+
+    <p>Each downtime after the first, roll:
+
+    <p>On 9 or less, choose one or your organization folds immediately:
+
+    <ul>
+      <li>Your organization loses 2 EFFICIENCY and 2 INFLUENCE, to a minimum of 0. If both are already at 0, you may not choose this.
+      <li>Your organization needs to pay debts, make an aggressive move, or get bailed out. You choose which, and the GM decides what that looks like.
+    </ul>
+
+    <p>On 10–19, your organization is stable. It gains +2 EFFICIENCY or INFLUENCE, to a maximum of +6.
+
+    <p>On 20+, your organization gains +2 EFFICIENCY and +2 INFLUENCE, to a maximum of +6.
+
+    <p>You must roll for your organization every downtime after starting one, but the roll doesn’t count as a downtime action.
+
+    <h4>GET CONNECTED</h4>
+
+    <p>When you GET CONNECTED, you make connections, call in favors, ask for help, or drum up support for a course of action. You can use your contacts’ resources or aid as RESERVES for the next mission.
+
+    <p>Name your contact and roll:
+
+    <p>On 9 or less, your contact will help you, but you’ve got to do a favor or make good on a promise right now. If you don’t, they won’t help you.
+
+    <p>On 10–19, your contact will help you, but you’ve got to do a favor or make good on a promise afterwards. If you don’t follow through, treat this result as 9 or less next time you get it for the same organization.
+
+    <p>On 20+, your contact will help you, no strings attached. Treat this result as 10–19 next time you get it for the same organization.
+
+    <p>To take this action, you need to be within comms range or somewhere you can have a good old-fashioned face-to-face conversation.
+
+    <h4>SCROUNGE AND BARTER</h4>
+
+    <p>When you SCROUNGE AND BARTER, you try to get your hands on some gear or an asset by dredging the scrapyard, chasing down rumors, bartering in the local market, or hunting around.
+
+    <p>You might want some better pilot gear, a vehicle, narcotics, goods, or other sundries. It needs to be something physical, but doesn’t necessarily have to be on the gear list. If you get it, you can take it on the next mission as RESERVES.
+
+      Name what you want and roll:
+
+    <p>On 9 or less, you get what you want, but choose one:
+
+    <ul>
+      <li>It was stolen, probably from someone who’s looking for it.
+      <li>It’s degraded, old, filthy, or malfunctioning.
+      <li>Someone else has it right now and won’t give it up without force or convincing.
+    </ul>
+
+    <p>On 10–19, you get what you want, but choose the price you need to pay:
+
+    <ul>
+      <li>Time.
+      <li>Dignity.
+      <li>Reputation.
+      <li>Health, comfort, and wellness.
+    </ul>
+
+    <p>On 20+, you get what you’re looking for, no problem.
+
+  </div>
+</body>
+<script>
+  window.onload = tooltipper;
+  const synonyms = {
+    "invoked": "invoke",
+    "Diasporans": "Diasporan",
+    "Diaspora": "Diasporan",
+    "Cosmopolitans": "Cosmopolitan",
+    "General Massive Systems": "GMS",
+    "NHPs": "NHP",
+    "SP1 Everest": "Everest",
+    "skill checks": "skill check",
+    "SKILL CHECKS": "skill check",
+    "license ranks": "license",
+    "licensed": "license",
+    "licenses": "license",
+    "license level": "LL",
+    "level": "LL",
+    "attacks": "attack",
+    "saves": "save",
+    "contested checks": "contested check",
+    "mech skills": "mech skill",
+    "hit points": "HP",
+    "Hit Points": "HP",
+    "FRAMES": "FRAME",
+    "SYSTEM POINTS": "SP",
+    "CORE POINTS": "CP",
+    "REPAIR CAP": "REPAIR",
+    "REPAIRS": "REPAIR",
+    "HEAT CAP": "HEAT",
+    "statuses": "status",
+    "conditions": "condition",
+    "DIFFICULTY": "DIFFICULT",
+    "ACCURACY": "ACCURATE"
+  }
+  const keywords = {
+    "background": "pg 20. Your pilot`s background describes their life before they became a mech pilot.",
+    "LL0": "The presumed starting level for a new character. Noob.",
+    "invoke": "pg 20. Outside of combat, you (or the GM) can invoke your pilot`s background to receive 1 ACCURACY or 1 DIFFICULTY on any skill check, if their background is relevant.",
+    "license": "pg 18. Licenses represent access to the valuable information, resources, and access required to acquire mech gear and parts. They are tightly controlled by the major powers in Lancer and allow their holders unlimited access to their included gear.",
+    "Diasporan": "pg 20. To be a Diasporan is to be a member of the largest class of humanity: world-bound people outside of the Galactic Core, who identify with single homeworlds they may never leave.",
+    "Cosmopolitan": "pg 21. A Cosmopolitan is a person who lives the majority of their life in interstellar transit and keeps their ship as their home.",
+    "NHP": "pg 22. NHP stands for “non-human person” a name given to uncanny, incorporeal parallel-space beings.\n• They are black-box paracausal entities – their promulgation tightly controlled and monitored by Union – but their use is widespread.\n• NHPs fill the roles once occupied by machine-mind AIs: under supervision, they manage whole cities and systems, work alongside scientists and engineers, and act as companions and co-pilots for mech pilots and starship captains.\n• NHPs are increasingly regarded as fundamental infrastructure for any successful civic, scientific, or military endeavor.",
+    "trigger": "pg 25. Triggers are Moves from PbtA.\n• When one of your character’s triggers is relevant to a skill check, you get a bonus to the roll.\n• Triggers never apply to attack rolls, saves, or any rolls other than skill checks.\n• When taking actions that rely on a mech, mech skills are used instead.",
+    "narrative play": "pg 12. During narrative play, players act naturally and spontaneously as needed.",
+    "mech combat": "pg 12. In mech combat, players act on their turn and are restricted in what they can do and how often, making each action much more impactful and tactical.",
+    "skill check": "pg 13. Roll 1d20 and add any relevant bonuses.\n• On a total of 10+, you succeed.\n• A result of 9 or less means you failed to accomplish your goal and may suffer consequences as a result.",
+    "attack": "pg 13. In mech combat, attacks are any offensive actions against other characters.\n• For an attack to be successful it needs to equal or exceed the target's defense.",
+    "save": "pg 13. In mech combat, saves are rolls made to avoid or resist negative effects.\n• For a defense to be successful it needs to equal or exceed the target number.",
+    "contested check": "pg 13. In a contested check, both participants make skill checks and add any bonuses.\n• Whoever has the highest result wins.\n• If the result is a tie, the attacker - the one who initiated the contest - wins.",
+    "stat bonus": "pg 13. Stat bonuses come from three sources. Each roll can only benefit from one stat bonus at a time.\n• Triggers (your pilot's talent and experience)\n• Mech skills (their skill with mechs)\n• GRIT (they're just that awesome)",
+    "mech skill": "pg 30. Your pilot's skills with mechs. Mech skills go from +0 to +6 and are used anytime your mech is involved.\n• HULL (build/pilot strong/durable)\n• AGILITY (build/pilot fast/evasive)\n• SYSTEMS (build/pilot sensors/jamming)\n• ENGINEERING (build/pilot supplies/support).",
+    "GRIT": "pg 14. GRIT is half of your character’s license level, rounded up.\n• GRIT is added to your pilot's and mech's HP and SAVE TARGET, as well as its SP and attack rolls.",
+    "ACCURATE": "pg 13. ACCURACY➕ adds 1d6 to a roll.\n• Multiple ACCURACY➕ dice are a keep-highest roll.\n• ACCURACY➕ and DIFFICULTY➖ cancel each other out on a 1:1 basis.",
+    "DIFFICULT": "pg 13. DIFFICULTY➖ adds 1d6 to a roll.\n• Multiple DIFFICULTY➖ dice are a keep-highest roll.\n• ACCURACY➕ and DIFFICULTY➖ cancel each other out on a 1:1 basis.",
+    "mission": "pg 14. If your character isn't in downtime, you're on a mission.\n• Missions have specific goals or objectives that can be completed within a discrete amount of time.",
+    "downtime": "pg 14. If your character isn’t on a mission, you’re in downtime.\n• During downtime you can progress plots, projects, or personal stories, moving the clock forward as much or as little as you want.",
+    "scene": "pg 14. In both missions and downtime, play is divided into scenes.\n• It’s important to pay attention to the beginning and end of scenes, as many special character and mech abilities end or reset at the end of a scene.",
+    "SIZE": "pg 28. SIZE is how much space a target takes up on the battlefield.\n• Humans and the smallest mechs are SIZE 1/2. \n• Most mechs are SIZE 1, but some are as large as SIZE 3.",
+    "HP": "pg 28. HIT POINTS (HP) is how much damage a target can take before they go down.\n• Pilot HP defaults to 6 + GRIT. \n• Light, Assault, and Heavy Hardsuits add +3 HP.",
+    "EVASION": "pg 28. EVASION is how hard it is to hit a target with a weapon.\n• Pilot EVASION defaults to 10.\n• Assault and Stealth Hardsuits are EVASION 8.\n• Heavy Hardsuits are EVASION 6.",
+    "E-DEFENSE": "pg 28. E-DEFENSE is how hard it is to hit a target with electronic systems and guided weapons.\n• Pilot E-DEFENSE defaults to 10.\n• Assault, Heavy, and Stealth Hardsuits are E-DEFENSE 8.",
+    "SPEED": "pg 28. SPEED is how many spaces a target can move at a time.\n• Pilot SPEED defaults to 4.\n• Heavy Hardsuits are SPEED 3.\n• Mobility Hardsuits are SPEED 5.",
+    "armor": "pg 110. Hardsuits are full-body suits designed to provide essential protection and to interface fully with any given mech.",
+    "HULL": "pg 30. Durability-based builds and tests. Your mech gains:\n• +2 HP for each point of HULL\n• +1 REPAIR CAP for every two points of HULL",
+    "AGILITY": "pg 30. Agility-based builds and tests. Your mech gains:\n• +1 EVASION for each point of AGILITY\n• +1 SPEED for every two points of AGILITY.",
+    "SYSTEMS": "pg 30. ECM-based builds and tests. Your mech gains:\n• +1 E-DEFENSE for each point of SYSTEMS\n• +1 TECH ATTACK for each point of SYSTEMS\n• +1 SP for every two points of SYSTEMS",
+    "ENGINEERING": "pg 30. Support-based builds and tests. Your mech gains:\n• +1 HEAT CAP for each point of ENGINEERING\n• +1 to the maximum use of any limited systems or weapons for every two points of ENGINEERING.",
+    "modular": "pg 31. Each FRAME comes with a list of license-restricted gear that, once unlocked, can be freely swapped between all of your mechs.",
+    "license rank": "pg 31. Every new rank you obtain unlocks various systems, weapons, and even mechs.\n• These weapons and systems are interchangeable – you can add as many to your mech as its FRAME can support, from any license rank you have unlocked.",
+    "FRAME": "pg 32. A FRAME is a mech’s modular base.\n• It determines your mech’s SIZE, ARMOR, and other specifications.\n• It determines its available weapon mounts and capacity for additional systems.\n• Each FRAME also comes with a unique CORE SYSTEM, a powerful special ability that can typically only be used once per mission.",
+    "ARMOR": "pg 32. A mech's ARMOR reduces all incoming damage by that amount, excluding some special types of damage.\n• ARMOR mostly depends on your mech’s FRAME, and never goes above four.",
+    "mount": "pg 32. Each mech FRAME has a different number and different types of mounts.\n• To add a weapon to your mech, you need an available mount of the right type and size.\n• You can add smaller weapons to larger mounts.",
+    "SUPERHEAVY": "pg 32. SUPERHEAVY weapons require both a Heavy mount and one other mount of any size.",
+    "HEAVY": "pg 32. HEAVY weapons must be mounted on Heavy mounts.\n• Superheavy weapons require both a Heavy mount and one other mount of any size.",
+    "MAIN": "pg 32. MAIN weapons may be mounted on Main mounts, Heavy mounts, Flexible mounts, or Main/aux mounts.",
+    "AUXILIARY": "pg 32. AUXILIARY weapons may be mounted on Main mounts, Heavy mounts, Aux/aux mounts, Main/aux mounts, and Flexible mounts.",
+    "Integrated": "pg 32. Integrated weapons are designed around specific weapons, built into FRAMES.\n• They include the listed weapons, which cannot be removed, replaced, or modified in any way.",
+    "SP": "pg 33. Mech FRAMES have a set number of SYSTEM POINTS (SP).\n• SP can be spent to add extra systems to your mech.\n• Some heavier weapons require both mounts and SP.\n• Your pilot’s GRIT is added to your total SP.\n• You gain an additional SP for every two points of SYSTEMS.",
+    "CP": "pg 33. CORE POWER (CP) is an emergency reservoir of power.\n• At any given time, a mech either has CP or it doesn't.\n• You get CP when you start a mission or your mech receives a FULL REPAIR.\n• The GM may grant you CP during a mission.",
+    "STRUCTURE": "pg 34. Most mechs have 4 STRUCTURE and are destroyed when they reach 0 STRUCTURE.\n• When they reach 0 HP, they take 1 STRUCTURE damage and their HP resets.\n•  When they lose STRUCTURE like this, mechs have to make a special structure damage check and receive a consequence based on the roll.",
+    "REPAIR": "pg 34. REPAIRS are a kind of currency that you can use to heal and repair your mech.\n• If your mech runs out of REPAIRS, you can no longer regain HP or fix damaged systems in the field.",
+    "BOOST": "pg 34. idk lol",
+    "SENSORS": "pg 34. Your mech’s SENSORS score is the maximum distance (in spaces) over which a mech can detect enemies, use tech systems, and make tech attacks.\n• If a character is within your SENSORS and isn’t hiding, you know they’re there – even if you can’t directly see them.",
+    "TECH ATTACK": "pg 34. Your mech adds its TECH ATTACK as a bonus instead of GRIT when you conduct electronic warfare.",
+    "HEAT": "pg 34. If a mech takes more heat than its HEAT CAP, it takes 1 STRESS damage and clears all heat.",
+    "STRESS": "pg 34. Most mechs have 4 STRESS and are destroyed when they reach 0 STRESS.\n• When they reach HEAT CAP, they take 1 STRESS damage and their HEAT resets.\n• When they lose STRESS like this, mechs have to make a special stress damage check and receive a consequence based on the roll.",
+    "SAVE TARGET": "pg 34. When you force another character to make a save, they must match or beat your mech’s SAVE TARGET or take consequences.",
+    "core bonuses": "pg 35. Core bonuses are permanent improvements that apply to any FRAME your pilot uses.\n• Your pilot gets a new core bonus every three LLs.\n• You can always choose core bonuses from the GMS list.\n• For other manufacturers, you first need to have three license ranks with that manufacturer.",
+    "LL": "pg 18. Your LICENSE LEVEL (LL) applies to both your pilot and your mech.",
+    "talent": "pg 35. Talents are pilot feats, lol.",
+    "condition": "pg 77. Conditions are temporary effects caused by things like damage and electronic warfare. There are many ways to remove conditions.",
+    "status": "pg 77. Statuses are effects that can’t easily be cleared. Characters must perform a specific action or meet criteria before they can be removed.",
+    "DANGER ZONE": "pg 77. A mech-only status. Characters are in the DANGER ZONE when half or more of their heat is filled in.\n• This status enables some attacks, talents, and effects.",
+    "DOWN AND OUT": "pg 77. A pilot-only status. Pilots that are DOWN AND OUT are unconscious and STUNNED – if they take any more damage, they die.\n• They'll regain consciousness and half of their HP when they rest.",
+    "ENGAGED": "pg 77. A universal status. ENGAGED characters make all ranged attacks at +1➖.\n• If a character becomes ENGAGED by a target of the same SIZE or greater during a move, the movement ends immediately and any unused movement from that move is lost.",
+    "EXPOSED": "pg 77. A mech-only status. Characters become EXPOSED when they’re dealing with runaway heat buildup.\n• All kinetic🛡️, explosive💥 or energy⚡ damage taken by EXPOSED characters is doubled, before applying any reductions.\n• A mech can clear EXPOSED by taking the STABILIZE action.",
+    "HIDDEN": "pg 77. A universal status. HIDDEN characters can’t be targeted by hostile attacks or actions, don’t cause engagement, and enemies only know their approximate location.\n• Attacking, forcing saves, taking reactions, using BOOST, and losing cover all remove HIDDEN after they resolve.\n• Characters can find HIDDEN characters with SEARCH.",
+    "INVISIBLE": "pg 77. A universal status. All attacks against INVISIBLE characters have a 50 percent chance to miss outright, before an attack roll is made.\n• Roll a dice or flip a coin to determine if the attack misses.\n• INVISIBLE characters can always HIDE, even without cover.",
+    "PRONE": "pg 77. A universal status. Attacks against PRONE targets receive +1➕.\n• Additionally, PRONE characters are SLOWED and count as moving in difficult terrain.\n• Characters can remove PRONE by standing up instead of taking their standard move, unless they’re IMMOBILIZED.\n• Standing up doesn’t count as movement, so doesn’t trigger OVERWATCH or other effects.",
+    "SHUT DOWN": "pg 77. A mech-only status. When a mech is SHUT DOWN:\n• All HEAT🌡️ is cleared and the EXPOSED status is removed.\n• Any cascading NHPs are stabilised and no longer cascading.\n• Any statuses and conditions affecting the mech caused by tech actions, such as LOCK ON, immediately end.\n• SHUT DOWN mechs have IMMUNITY to all tech actions and attacks, including any from allied characters.\n• While SHUT DOWN, mechs are STUNNED indefinitely.\n• Nothing can prevent this condition, and it remains until the mech ceases to be SHUT DOWN.",
+    "IMMOBILIZED": "pg 78. A universal condition. IMMOBILIZED characters cannot make any voluntary movements, although involuntary movements are unaffected.",
+    "IMPAIRED": "pg 78. A universal condition. IMPAIRED characters receive +1➖ on all attacks, saves, and skill checks.",
+    "JAMMED": "pg 78. A universal condition. JAMMED characters can’t:\n• Use comms to talk to other characters.\n• Make attacks, other than IMPROVISED ATTACK, GRAPPLE, and RAM.\n• Take reactions, or take or benefit from tech actions.",
+    "LOCK ON": "pg 78. A universal condition. Hostile characters can choose to consume a character’s LOCK ON condition in exchange for +1➕ on their next attack against that character.\n• LOCK ON is also required to use some talents and systems.",
+    "SHREDDED": "pg 78. A universal condition. SHREDDED characters don’t benefit from ARMOR or RESISTANCE.",
+    "SLOWED": "pg 78. A universal condition. The only movement SLOWED characters can make is their standard move, on their own turn.\n• They can’t BOOST or make any special moves granted by talents, systems, or weapons.",
+    "STUNNED": "pg 78. A mech-only condition. STUNNED mechs cannot OVERCHARGE, move, or take any actions – including free actions and reactions.\n• Pilots can still MOUNT, DISMOUNT, or EJECT from STUNNED mechs, and can take actions normally.\n• STUNNED mechs have a maximum of 5 EVASION.\n• STUNNED mechs automatically fail all HULL and AGILITY checks and saves.",
+    "ARMOR": "pg 78. All kinetic, energy, and explosive damage is reduced by an amount equal to a character’s ARMOR. Mechs can’t have more than 4 ARMOR.",
+    "BONUS DAMAGE": "pg 78. Extra damage – kinetic🛡️, energy⚡ or explosive💥– that is added onto melee or ranged attacks. Attacks that target more than one character or object only deal half bonus damage.",
+    "Damage": "pg 78. Damage taken is subtracted from HP, and is either kinetic🛡️, explosive💥, energy⚡, or burn🔥.",
+    "E-DEFENSE": "pg 78. The statistic used to defend against tech attacks.",
+    "EVASION": "pg 78. The statistic used to defend against most melee and ranged attacks.",
+    "GRIT": "pg 78. Half of a character’s LL (rounded up), representing their experience in combat. GRIT provides bonuses to some rolls and traits.",
+    "HEAT": "pg 78. HEAT🌡️ taken by a target represents harm to internal systems and reactor shielding. It fills in HEAT CAP.",
+    "HEAT CAP": "pg 78. The amount of HEAT🌡️ a mech can take before it is at risk of overheating.",
+    "HP": "pg 78. The amount of damage a pilot can receive before going DOWN AND OUT, and the amount of damage a mech can receive before it takes structure damage.",
+    "IMMUNITY": "pg 78. Characters with IMMUNITY ignore all damage and effects from whatever they are immune to.",
+    "RANGE": "pg 78. The maximum range at which a weapon can be used for ranged attacks, measured from the attacking character.",
+    "REPAIR CAP": "pg 78. The number of times a mech can be repaired per mission.",
+    "RESISTANCE": "pg 78. Characters with RESISTANCE reduce damage, heat, or a type of damage, by half, after ARMOR has been applied. RESISTANCE to the same type of damage does not stack.",
+    "STRESS": "pg 79. All PC mechs (and some NPCs) have a certain amount of STRESS – generally 4 STRESS for PCs. This is the amount of stress damage they can take before they suffer a reactor meltdown. When mechs exceed their HEAT CAP, they take 1 stress damage and make an overheating check.",
+    "Structure": "pg 79. All PC mechs (and some NPCs) have a certain amount of STRUCTURE – generally 4 STRUCTURE for PCs. This is the amount of structure damage they can take before they are destroyed. When mechs reach 0 HP, they take 1 structure damage and make a structure check.",
+    "TECH ATTACK": "pg 79. The statistic used to make tech attacks and to take most tech actions.",
+    "THREAT": "pg 79. The maximum range at which melee and overwatch attacks can be made certain weapons, measured from the attacking character. All weapons have THREAT 1 unless specified otherwise.",
+    "SENSORS": "pg 79. The maximum range at which you can detect other characters, make tech attacks, LOCK ON, and use some systems.",
+    "SIZE": "pg 79. The number of spaces that are occupied or controlled by a character or object. For example, SIZE 2 mechs occupy an area 2 spaces on each side and 2 spaces high. SIZE doesn’t necessarily represent precise physical dimensions.",
+    "SPEED": "pg 79. The number of spaces a character can move with a standard move or BOOST.",
+    "Everest": "shit tier new character frame",
+    "GMS": "General Massive Systems",
+    "RISKY": "pg 45. When rolling a RISKY skill check, a character suffers consequences if the result is less than 20. A RISKY skill check still succeeds as usual on 10+, but the character suffers consequences anyway.",
+    "HEROIC": "pg 46. A HEROIC roll is only successful on a result of 20+, and the character making the attempt suffers consequences if the result is less than 20.",
+    "Lancer": "©2019 Massif Press\nmassif-press.itch.io\ntwitter.com/LancerRPG"
+  };
+
+  function tooltipper() {
+    var spans = document.getElementsByClassName("check");
+    for (var x of spans) {
+      var step1 = x.innerHTML;
+      for (var y in synonyms) {
+        var step0 = md5(y);
+        step1 = step1.replaceAll(y, step0);
+      }
+      for (var y in keywords) {
+        var step0 = md5(y);
+        step1 = step1.replaceAll(y, step0);
+      }
+      for (var y in synonyms) {
+        var step0 = md5(y);
+        var step3 =
+          '</span><span class="tooltip" data-tooltip="' +
+          keywords[synonyms[y]] +
+          '" data-tooltip-position="bottom">' +
+          y +
+          '</span><span class="check">';
+        step1 = step1.replaceAll(step0, step3);
+      }
+      for (var y in keywords) {
+        var step0 = md5(y);
+        var step3 =
+          '</span><span class="tooltip" data-tooltip="' +
+          keywords[y] +
+          '" data-tooltip-position="bottom">' +
+          y +
+          '</span><span class="check">';
+        step1 = step1.replaceAll(step0, step3);
+      }
+      x.innerHTML = step1;
+    }
+  }
+  //  Formatted version of a popular md5 implementation
+  //  Original copyright (c) Paul Johnston & Greg Holt.
+  //  The function itself is now 42 lines long.
+  function md5(inputString) {
+    var hc = "0123456789abcdef";
+
+    function rh(n) {
+      var j, s = "";
+      for (j = 0; j <= 3; j++) s += hc.charAt((n >> (j * 8 + 4)) & 0x0F) + hc.charAt((n >> (j * 8)) & 0x0F);
+      return s;
+    }
+
+    function ad(x, y) {
+      var l = (x & 0xFFFF) + (y & 0xFFFF);
+      var m = (x >> 16) + (y >> 16) + (l >> 16);
+      return (m << 16) | (l & 0xFFFF);
+    }
+
+    function rl(n, c) {
+      return (n << c) | (n >>> (32 - c));
+    }
+
+    function cm(q, a, b, x, s, t) {
+      return ad(rl(ad(ad(a, q), ad(x, t)), s), b);
+    }
+
+    function ff(a, b, c, d, x, s, t) {
+      return cm((b & c) | ((~b) & d), a, b, x, s, t);
+    }
+
+    function gg(a, b, c, d, x, s, t) {
+      return cm((b & d) | (c & (~d)), a, b, x, s, t);
+    }
+
+    function hh(a, b, c, d, x, s, t) {
+      return cm(b ^ c ^ d, a, b, x, s, t);
+    }
+
+    function ii(a, b, c, d, x, s, t) {
+      return cm(c ^ (b | (~d)), a, b, x, s, t);
+    }
+
+    function sb(x) {
+      var i;
+      var nblk = ((x.length + 8) >> 6) + 1;
+      var blks = new Array(nblk * 16);
+      for (i = 0; i < nblk * 16; i++) blks[i] = 0;
+      for (i = 0; i < x.length; i++) blks[i >> 2] |= x.charCodeAt(i) << ((i % 4) * 8);
+      blks[i >> 2] |= 0x80 << ((i % 4) * 8);
+      blks[nblk * 16 - 2] = x.length * 8;
+      return blks;
+    }
+    var i, x = sb("" + inputString),
+      a = 1732584193,
+      b = -271733879,
+      c = -1732584194,
+      d = 271733878,
+      olda, oldb, oldc, oldd;
+    for (i = 0; i < x.length; i += 16) {
+      olda = a;
+      oldb = b;
+      oldc = c;
+      oldd = d;
+      a = ff(a, b, c, d, x[i + 0], 7, -680876936);
+      d = ff(d, a, b, c, x[i + 1], 12, -389564586);
+      c = ff(c, d, a, b, x[i + 2], 17, 606105819);
+      b = ff(b, c, d, a, x[i + 3], 22, -1044525330);
+      a = ff(a, b, c, d, x[i + 4], 7, -176418897);
+      d = ff(d, a, b, c, x[i + 5], 12, 1200080426);
+      c = ff(c, d, a, b, x[i + 6], 17, -1473231341);
+      b = ff(b, c, d, a, x[i + 7], 22, -45705983);
+      a = ff(a, b, c, d, x[i + 8], 7, 1770035416);
+      d = ff(d, a, b, c, x[i + 9], 12, -1958414417);
+      c = ff(c, d, a, b, x[i + 10], 17, -42063);
+      b = ff(b, c, d, a, x[i + 11], 22, -1990404162);
+      a = ff(a, b, c, d, x[i + 12], 7, 1804603682);
+      d = ff(d, a, b, c, x[i + 13], 12, -40341101);
+      c = ff(c, d, a, b, x[i + 14], 17, -1502002290);
+      b = ff(b, c, d, a, x[i + 15], 22, 1236535329);
+      a = gg(a, b, c, d, x[i + 1], 5, -165796510);
+      d = gg(d, a, b, c, x[i + 6], 9, -1069501632);
+      c = gg(c, d, a, b, x[i + 11], 14, 643717713);
+      b = gg(b, c, d, a, x[i + 0], 20, -373897302);
+      a = gg(a, b, c, d, x[i + 5], 5, -701558691);
+      d = gg(d, a, b, c, x[i + 10], 9, 38016083);
+      c = gg(c, d, a, b, x[i + 15], 14, -660478335);
+      b = gg(b, c, d, a, x[i + 4], 20, -405537848);
+      a = gg(a, b, c, d, x[i + 9], 5, 568446438);
+      d = gg(d, a, b, c, x[i + 14], 9, -1019803690);
+      c = gg(c, d, a, b, x[i + 3], 14, -187363961);
+      b = gg(b, c, d, a, x[i + 8], 20, 1163531501);
+      a = gg(a, b, c, d, x[i + 13], 5, -1444681467);
+      d = gg(d, a, b, c, x[i + 2], 9, -51403784);
+      c = gg(c, d, a, b, x[i + 7], 14, 1735328473);
+      b = gg(b, c, d, a, x[i + 12], 20, -1926607734);
+      a = hh(a, b, c, d, x[i + 5], 4, -378558);
+      d = hh(d, a, b, c, x[i + 8], 11, -2022574463);
+      c = hh(c, d, a, b, x[i + 11], 16, 1839030562);
+      b = hh(b, c, d, a, x[i + 14], 23, -35309556);
+      a = hh(a, b, c, d, x[i + 1], 4, -1530992060);
+      d = hh(d, a, b, c, x[i + 4], 11, 1272893353);
+      c = hh(c, d, a, b, x[i + 7], 16, -155497632);
+      b = hh(b, c, d, a, x[i + 10], 23, -1094730640);
+      a = hh(a, b, c, d, x[i + 13], 4, 681279174);
+      d = hh(d, a, b, c, x[i + 0], 11, -358537222);
+      c = hh(c, d, a, b, x[i + 3], 16, -722521979);
+      b = hh(b, c, d, a, x[i + 6], 23, 76029189);
+      a = hh(a, b, c, d, x[i + 9], 4, -640364487);
+      d = hh(d, a, b, c, x[i + 12], 11, -421815835);
+      c = hh(c, d, a, b, x[i + 15], 16, 530742520);
+      b = hh(b, c, d, a, x[i + 2], 23, -995338651);
+      a = ii(a, b, c, d, x[i + 0], 6, -198630844);
+      d = ii(d, a, b, c, x[i + 7], 10, 1126891415);
+      c = ii(c, d, a, b, x[i + 14], 15, -1416354905);
+      b = ii(b, c, d, a, x[i + 5], 21, -57434055);
+      a = ii(a, b, c, d, x[i + 12], 6, 1700485571);
+      d = ii(d, a, b, c, x[i + 3], 10, -1894986606);
+      c = ii(c, d, a, b, x[i + 10], 15, -1051523);
+      b = ii(b, c, d, a, x[i + 1], 21, -2054922799);
+      a = ii(a, b, c, d, x[i + 8], 6, 1873313359);
+      d = ii(d, a, b, c, x[i + 15], 10, -30611744);
+      c = ii(c, d, a, b, x[i + 6], 15, -1560198380);
+      b = ii(b, c, d, a, x[i + 13], 21, 1309151649);
+      a = ii(a, b, c, d, x[i + 4], 6, -145523070);
+      d = ii(d, a, b, c, x[i + 11], 10, -1120210379);
+      c = ii(c, d, a, b, x[i + 2], 15, 718787259);
+      b = ii(b, c, d, a, x[i + 9], 21, -343485551);
+      a = ad(a, olda);
+      b = ad(b, oldb);
+      c = ad(c, oldc);
+      d = ad(d, oldd);
+    }
+    return rh(a) + rh(b) + rh(c) + rh(d);
+  }
+</script>
+
+</html>
