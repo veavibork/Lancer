@@ -1,4 +1,4 @@
-import synonyms, keywords from "./dictionary.js";
+import synonyms, keywords from './dictionary.js';
 
 window.onload = tooltipper;
 
