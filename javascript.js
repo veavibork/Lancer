@@ -1,3 +1,5 @@
+import * as Constants from "dictionary"
+
 window.onload = tooltipper;
 
   function tooltipper() {
