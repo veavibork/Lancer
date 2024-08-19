@@ -1,5 +1,3 @@
-import synonyms, keywords from './dictionary.js';
-
 window.onload = tooltipper;
 
   function tooltipper() {
